@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "measurements",
+  "info": {
+    "singularName": "measurement",
+    "pluralName": "measurements",
+    "displayName": "measurement",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "temp": {
+      "type": "float"
+    }
+  }
+}

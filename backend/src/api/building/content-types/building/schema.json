@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "buildings",
+  "info": {
+    "singularName": "building",
+    "pluralName": "buildings",
+    "displayName": "building",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "pos_tl": {
+      "type": "float"
+    },
+    "pos_br": {
+      "type": "float"
+    },
+    "spaces": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::space.space"
+    }
+  }
+}
