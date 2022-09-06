@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "spaces",
+  "info": {
+    "singularName": "space",
+    "pluralName": "spaces",
+    "displayName": "space",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "decimal"
+    },
+    "measurements": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::measurement.measurement"
+    }
+  }
+}
