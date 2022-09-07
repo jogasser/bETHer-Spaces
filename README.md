@@ -1,6 +1,6 @@
 # bETHer spaces
 
-Empowering students through healthy spaces.
+Empowering students with healthy spaces.
 
 ## Frontend
 
@@ -33,7 +33,28 @@ nvm install --lts
 
 ##### Webserver
 
-:
+```js
+# ./server.js
+
+```
+```js
+
+# ./ecosystem.config.js
+module.exports = {
+    apps: [
+        {
+            name: 'bether',
+            script: 'npm',
+            args: 'develop',
+            env: {
+            NODE_ENV: 'development',
+            },
+            exp_backoff_restart_delay: 100,
+        },
+    ],
+};
+
+```
 
 To ensure the webserver runs after a hardmetal server reboot, install and configure the process manager PM2 as follows:
 
