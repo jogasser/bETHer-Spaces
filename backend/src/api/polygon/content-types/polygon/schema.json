@@ -4,24 +4,25 @@
   "info": {
     "singularName": "polygon",
     "pluralName": "polygons",
-    "displayName": "polygon"
+    "displayName": "polygon",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "lat": {
-      "type": "float"
-    },
-    "long": {
-      "type": "float"
-    },
     "space": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::space.space",
       "inversedBy": "polygons"
+    },
+    "lat": {
+      "type": "float"
+    },
+    "lon": {
+      "type": "float"
     }
   }
 }
