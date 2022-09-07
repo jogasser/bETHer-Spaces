@@ -1,6 +1,8 @@
 ############################
 # OS X
 ############################
+ecosystem.config.js
+server.js
 
 .DS_Store
 .AppleDouble
