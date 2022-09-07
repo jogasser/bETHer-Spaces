@@ -1,5 +1,5 @@
 import React, {ReactElement, useEffect, useRef} from 'react';
-import {Polygon, Popup, useMapEvent} from 'react-leaflet';
+import {Polygon, Popup} from 'react-leaflet';
 import {Text, Title, withTheme} from 'react-native-paper';
 import {View} from 'react-native';
 import {Space} from "../../data/MockSpaces";
@@ -14,7 +14,6 @@ export interface SpaceMarkerProps {
 
 function SpaceMarker({space, theme, open, callback}: SpaceMarkerProps): ReactElement {
   const ref = useRef(null);
-
   const environmentalData = space.environmentalData &&
     <View>
         <Text> Temperatur: {space.environmentalData?.temperature }</Text>
@@ -39,7 +38,7 @@ function SpaceMarker({space, theme, open, callback}: SpaceMarkerProps): ReactEle
         ref={ref}
         fill
       >
-        <Popup>
+        <Popup autoPanPadding={[350,350]}>
           <Title>{space.name}</Title>
           <Rating
             type='star'
