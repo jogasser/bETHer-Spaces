@@ -21,7 +21,8 @@
     "measurements": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::measurement.measurement"
+      "target": "api::measurement.measurement",
+      "mappedBy": "space"
     },
     "polygons": {
       "type": "relation",
