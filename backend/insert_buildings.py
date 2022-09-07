@@ -4,8 +4,8 @@ import requests
 import json
 
 json_file = 'buildings.json'
-# base_url = "https://bether.tenderribs.cc/api/"
-base_url = "http://localhost:1337/api/"
+base_url = "https://bether.tenderribs.cc/api/"
+# base_url = "http://localhost:1337/api/"
 
 spaces_url = base_url + "spaces"
 buildings_url = base_url + "buildings"
