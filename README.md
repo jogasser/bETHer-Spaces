@@ -2,6 +2,8 @@
 
 Empowering students with healthy spaces.
 
+![Architecture Overview](./docs/architecture-overview.png)
+
 ## Frontend
 
 ```sh
