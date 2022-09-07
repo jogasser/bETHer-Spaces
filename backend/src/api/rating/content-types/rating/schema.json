@@ -1,27 +1,24 @@
 {
   "kind": "collectionType",
-  "collectionName": "polygons",
+  "collectionName": "ratings",
   "info": {
-    "singularName": "polygon",
-    "pluralName": "polygons",
-    "displayName": "polygon"
+    "singularName": "rating",
+    "pluralName": "ratings",
+    "displayName": "rating"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "lat": {
-      "type": "float"
-    },
-    "long": {
-      "type": "float"
+    "star_value": {
+      "type": "decimal"
     },
     "space": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::space.space",
-      "inversedBy": "polygons"
+      "inversedBy": "ratings"
     }
   }
 }
