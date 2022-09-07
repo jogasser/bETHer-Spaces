@@ -19,31 +19,46 @@ def post(payload, url):
     print(response.text)
 
 
+space_id = 0
+polygon_id = 0
+
 with open(json_file, "r") as source:
-
     data = json.load(source)
-    for building_idx, building in enumerate(data["buildings"]):
-        building_payload = {"data": {
-            "name": building['name'],
-        }}
-
-        post(building_payload, buildings_url)
-
+    for building in data["buildings"]:
         spaces = building['spaces']
-        for space_idx, space in enumerate(spaces):
-            spaces_payload = {"data": {
-                "name": space['name'],
-                "seats": space['seats'],
-                "building":  building_idx
-            }}
+        space_ids = []
+
+        for space in spaces:
+            space_id += 1
+            space_ids.append(space_id)
+
+            polygon_ids = []
 
             for polygon in space['polygons']:
+                polygon_id += 1
+                polygon_ids.append(polygon_id)
+
                 polygon_payload = {"data": {
                     "lat": polygon['lat'],
                     "long": polygon['long'],
-                    "space": space_idx
                 }}
 
                 post(polygon_payload, polygons_url)
 
+            spaces_payload = {"data": {
+                "name": space['name'],
+                "seats": space['seats'],
+                "polygons": polygon_ids
+            }}
+
             post(spaces_payload, spaces_url)
+
+        print(space_ids)
+
+        building_payload = {"data": {
+            "name": building['name'],
+            "spaces": space_ids
+        }}
+        print(building_payload)
+
+        post(building_payload, buildings_url)
