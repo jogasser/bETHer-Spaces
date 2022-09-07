@@ -53,7 +53,7 @@ function InteractiveMap({lon, lat, data, selectedSpaceId, style, setSelectedSpac
           url={`https://osm.ideal-sharing.ch/tile/{z}/{x}/{y}.png`}
         />
         { data.map(value =>
-          <SpaceMarker space={value} open={selectedSpaceId === value.id} callback={setSelectedSpaceId}/>
+          <SpaceMarker key={value.id} space={value} open={selectedSpaceId === value.id} callback={setSelectedSpaceId}/>
         )}
       </MapContainer>
     </View>
