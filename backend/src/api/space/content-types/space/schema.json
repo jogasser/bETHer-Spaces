@@ -15,9 +15,6 @@
     "name": {
       "type": "string"
     },
-    "rating": {
-      "type": "decimal"
-    },
     "measurements": {
       "type": "relation",
       "relation": "oneToMany",
@@ -30,11 +27,11 @@
       "target": "api::polygon.polygon",
       "mappedBy": "space"
     },
-    "building": {
+    "ratings": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::building.building",
-      "inversedBy": "spaces"
+      "relation": "oneToMany",
+      "target": "api::rating.rating",
+      "mappedBy": "space"
     }
   }
 }
