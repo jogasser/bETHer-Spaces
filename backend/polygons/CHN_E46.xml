@@ -1,0 +1,55 @@
+﻿<kml xmlns="http://www.opengis.net/kml/2.2"
+    xmlns:gx="http://www.google.com/kml/ext/2.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/kml/2.2 https://developers.google.com/kml/schema/kml22gx.xsd">
+    <Document>
+        <name>Zeichnung</name>
+        <Placemark id="linepolygon_1662544943711">
+            <ExtendedData>
+                <Data name="type">
+                    <value>linepolygon</value>
+                </Data>
+            </ExtendedData>
+            <description></description>
+            <Style>
+                <LineStyle>
+                    <color>ff0000ff</color>
+                    <width>3</width>
+                </LineStyle>
+                <PolyStyle>
+                    <color>660000ff</color>
+                </PolyStyle>
+            </Style>
+            <Polygon>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>8.549056832241579,47.37926507374668 8.549162112596578,47.37926433957654 8.549177507306547,47.37915690581523 8.549065046234853,47.37916141048659 8.549056832241579,47.37926507374668</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="linepolygon_1662545248303">
+            <ExtendedData>
+                <Data name="type">
+                    <value>linepolygon</value>
+                </Data>
+            </ExtendedData>
+            <description></description>
+            <Style>
+                <LineStyle>
+                    <color>ff0000ff</color>
+                    <width>3</width>
+                </LineStyle>
+                <PolyStyle>
+                    <color>660000ff</color>
+                </PolyStyle>
+            </Style>
+            <Polygon>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>8.5484563704723,47.378842460916616 8.548460382469521,47.37892393664258 8.548650853934134,47.37891528411436 8.548652215407458,47.37883098689907 8.5484563704723,47.378842460916616</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

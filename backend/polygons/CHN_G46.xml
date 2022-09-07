@@ -1,0 +1,31 @@
+﻿<kml xmlns="http://www.opengis.net/kml/2.2"
+    xmlns:gx="http://www.google.com/kml/ext/2.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/kml/2.2 https://developers.google.com/kml/schema/kml22gx.xsd">
+    <Document>
+        <name>Zeichnung</name>
+        <Placemark id="linepolygon_1662545675601">
+            <ExtendedData>
+                <Data name="type">
+                    <value>linepolygon</value>
+                </Data>
+            </ExtendedData>
+            <description></description>
+            <Style>
+                <LineStyle>
+                    <color>ff0000ff</color>
+                    <width>3</width>
+                </LineStyle>
+                <PolyStyle>
+                    <color>660000ff</color>
+                </PolyStyle>
+            </Style>
+            <Polygon>
+                <outerBoundaryIs>
+                    <LinearRing>
+                        <coordinates>8.548481833296927,47.37884307608691 8.548488524614015,47.3789072666506 8.548597405193123,47.37890743289266 8.548590663257583,47.37884081809015 8.548481833296927,47.37884307608691</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>
