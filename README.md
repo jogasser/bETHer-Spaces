@@ -3,9 +3,9 @@
 > Empowering students with healthy spaces.
 
 ## 🚀 Getting Started
-|                                                App Screenshot                                                 |                                                   Overview                                                    |
-| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-| [![Architecture Overview](./docs/architecture-overview.png)](https://dbdiagram.io/d/63173da40911f91ba5473ff1) | [![Architecture Overview](./docs/architecture-overview.png)](https://dbdiagram.io/d/63173da40911f91ba5473ff1) |
+|                                                App Screenshot                                                 |                                        Overview                                        |
+| :-----------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
+| [![Architecture Overview](./docs/architecture-overview.png)](https://dbdiagram.io/d/63173da40911f91ba5473ff1) | [![DB Diagram](./docs/dbdiagram.png)](https://dbdiagram.io/d/63173da40911f91ba5473ff1) |
 
 
 - [Frontend Documentation](./docs/frontend.md)
