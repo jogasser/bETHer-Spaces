@@ -1,27 +1,19 @@
-import React, {ReactElement, useState} from 'react';
-import {Polygon, Popup} from 'react-leaflet';
+import React, {ReactElement, useEffect, useRef} from 'react';
+import {Polygon, Popup, useMapEvent} from 'react-leaflet';
 import {Text, Title, withTheme} from 'react-native-paper';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {Space} from "../../data/MockSpaces";
 import {Rating} from "react-native-ratings";
 
 export interface SpaceMarkerProps {
   space: Space
   theme: ReactNativePaper.Theme
+  open: boolean
+  callback: (id: number) => void
 }
 
-function SpaceMarker({space, theme}: SpaceMarkerProps): ReactElement {
-  const [ active, setActive ] = useState(false);
-
-  const styles = StyleSheet.create({
-    infoBox: {
-      backgroundColor: theme.colors.surface,
-      borderRadius: theme.roundness,
-      borderWidth: 2,
-      borderColor: theme.colors.primary,
-      opacity: active ? 1 : 0,
-    }
-  })
+function SpaceMarker({space, theme, open, callback}: SpaceMarkerProps): ReactElement {
+  const ref = useRef(null);
 
   const environmentalData = space.environmentalData &&
     <View>
@@ -29,14 +21,25 @@ function SpaceMarker({space, theme}: SpaceMarkerProps): ReactElement {
         <Text> Noise: {space.environmentalData?.noise }</Text>
     </View>;
 
+  useEffect(() => {
+    if(open && ref != null && ref.current != null) {
+      // @ts-expect-error Don't want to type the ref :)
+      ref.current.openPopup();
+    }
+  }, [ref, open])
+
   return (
     <View>
       <Polygon
         positions={space.polygon}
         color={theme.colors.primary}
+        eventHandlers={{
+          click: () => callback(space.id),
+        }}
+        ref={ref}
         fill
       >
-        <Popup >
+        <Popup>
           <Title>{space.name}</Title>
           <Rating
             type='star'
