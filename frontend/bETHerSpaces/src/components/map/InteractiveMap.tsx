@@ -10,15 +10,16 @@ export interface CustomMapViewProps {
   lon: number;
   lat: number;
   data: Space[];
-  style: StyleProp<ViewStyle>
-  range?: number;
+  style?: StyleProp<ViewStyle>
+  selectedSpaceId?: number;
+  setSelectedSpaceId: (id: number) => void
   theme: ReactNativePaper.Theme
 }
 
 /**
  * Map implementation for web
  */
-function InteractiveMap({lon, lat, range, data, style}: CustomMapViewProps): ReactElement {
+function InteractiveMap({lon, lat, data, selectedSpaceId, style, setSelectedSpaceId}: CustomMapViewProps): ReactElement {
   const styles = StyleSheet.create({
     wrapper: {
       height: 900,
@@ -52,7 +53,7 @@ function InteractiveMap({lon, lat, range, data, style}: CustomMapViewProps): Rea
           url={`https://osm.ideal-sharing.ch/tile/{z}/{x}/{y}.png`}
         />
         { data.map(value =>
-          <SpaceMarker space={value} />
+          <SpaceMarker space={value} open={selectedSpaceId === value.id} callback={setSelectedSpaceId}/>
         )}
       </MapContainer>
     </View>
