@@ -10,6 +10,7 @@
 
 - [Frontend Documentation](./docs/frontend.md)
 - [Backend Documentation](./docs/backend.md)
+- [Sensor Nodes Documentation](./docs/SensorNodes.md)
 
 ## REST-API
 
