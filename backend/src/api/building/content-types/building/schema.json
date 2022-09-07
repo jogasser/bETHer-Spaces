@@ -18,7 +18,8 @@
     "spaces": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::space.space"
+      "target": "api::space.space",
+      "mappedBy": "building"
     }
   }
 }

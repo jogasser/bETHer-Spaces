@@ -26,8 +26,15 @@
     },
     "polygons": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::polygon.polygon"
+      "relation": "oneToMany",
+      "target": "api::polygon.polygon",
+      "mappedBy": "space"
+    },
+    "building": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::building.building",
+      "inversedBy": "spaces"
     }
   }
 }
