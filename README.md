@@ -1,6 +1,6 @@
 # bETHer spaces
 
-Empowering students with healthy spaces.
+Empowering students through healthy spaces.
 
 ## Frontend
 
