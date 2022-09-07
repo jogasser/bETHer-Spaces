@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "polygons",
+  "info": {
+    "singularName": "polygon",
+    "pluralName": "polygons",
+    "displayName": "polygon"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "lat": {
+      "type": "float"
+    },
+    "long": {
+      "type": "float"
+    }
+  }
+}
