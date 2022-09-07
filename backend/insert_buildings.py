@@ -46,7 +46,7 @@ with open(json_file, "r") as source:
             for polygon in space['polygons']:
                 polygon_payload = {"data": {
                     "lat": polygon['lat'],
-                    "long": polygon['long'],
+                    "lon": polygon['lon'],
                     "space": space_id
                 }}
 
