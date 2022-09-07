@@ -31,30 +31,47 @@ Then get node 16.20.0
 nvm install --lts
 ```
 
-##### Webserver
+#### Apache2
 
-```js
-# ./server.js
+Install the following configuration file in `/etc/apache2/sites-available/bether.tenderribs.cc.conf`. This sets up a reverse proxy to strapi running on the local machine.
 
+Update the environment files for the project. Specifically you need to update the domain name everywhere.
+
+```conf
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+        ServerName bether.tenderribs.cc
+        ServerAlias bether.tenderribs.cc
+
+        ProxyPreserveHost On
+        ProxyPass / http://127.0.0.1:6969/
+        ProxyPassReverse / http://127.0.0.1:6969/
+
+        SSLProxyEngine on
+        SSLEngine on
+
+        RewriteEngine on
+
+    SSLCertificateFile /etc/letsencrypt/live/bether.tenderribs.cc/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/bether.tenderribs.cc/privkey.pem
+    Include /etc/letsencrypt/options-ssl-apache.conf
+</VirtualHost>
+</IfModule>
 ```
-```js
 
-# ./ecosystem.config.js
-module.exports = {
-    apps: [
-        {
-            name: 'bether',
-            script: 'npm',
-            args: 'develop',
-            env: {
-            NODE_ENV: 'development',
-            },
-            exp_backoff_restart_delay: 100,
-        },
-    ],
-};
-
+```conf
+# ./.env
+HOST=127.0.0.1
+PORT=6969
+PUBLIC_URL=https://bether.tenderribs.cc
+APP_KEYS=
+JWT_SECRET=
+API_TOKEN_SALT=
+ADMIN_JWT_SECRET=
 ```
+
+
+#### Webserver
 
 To ensure the webserver runs after a hardmetal server reboot, install and configure the process manager PM2 as follows:
 
