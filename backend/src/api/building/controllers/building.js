@@ -16,6 +16,7 @@ module.exports = createCoreController('api::building.building', ({ strapi }) => 
                 spaces: {
                     populate: {
                         measurements: true,
+                        polygons: true
                     }
                 },
             },

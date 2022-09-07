@@ -14,6 +14,12 @@
   "attributes": {
     "temp": {
       "type": "float"
+    },
+    "space": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::space.space",
+      "inversedBy": "measurements"
     }
   }
 }
