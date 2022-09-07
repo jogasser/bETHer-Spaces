@@ -15,12 +15,6 @@
     "name": {
       "type": "string"
     },
-    "pos_tl": {
-      "type": "float"
-    },
-    "pos_br": {
-      "type": "float"
-    },
     "spaces": {
       "type": "relation",
       "relation": "oneToMany",

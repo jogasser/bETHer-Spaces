@@ -22,6 +22,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::measurement.measurement"
+    },
+    "polygons": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::polygon.polygon"
     }
   }
 }
