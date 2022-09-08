@@ -2,6 +2,11 @@
 
 > Empowering students with healthy spaces.
 
+With bETHer spaces, we aim to provide an easy to use tool for students to find ideal student learning spaces.
+We use the data provided by Enviro+ sensors to feed an API with environmental informations about a study space.
+A user can use this data to find a study space that matches its exact environmental preferences.
+Lastly our application allows users to review existing spaces or add new spaces to share their favourite spots with other users.
+
 ## 🚀 Getting Started
 |                                                App Screenshot                                                 |                                        Overview                                        |
 | :-----------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
