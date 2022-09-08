@@ -32,6 +32,17 @@
       "relation": "oneToMany",
       "target": "api::rating.rating",
       "mappedBy": "space"
+    },
+    "img": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": false
     }
   }
 }

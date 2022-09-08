@@ -1,21 +1,23 @@
 import {ReactElement, useEffect, useState} from "react";
-import {StyleSheet, TouchableOpacity, View} from "react-native";
+import {StyleSheet, useWindowDimensions, View} from "react-native";
 import InteractiveMap from "../components/map/InteractiveMap";
-import MockSpaces, {Space} from "../data/MockSpaces";
-import {Divider, Title} from "react-native-paper";
 import {theme} from "../config/theme";
 import {RouteProp, useRoute} from "@react-navigation/core";
 import {MainNavigationParamsList} from "../navigation/AppLinking";
 import axios from "axios";
-import {Rating} from "react-native-ratings";
+import {Space} from "../data/Space";
+import LoadingScreen from "./LoadingScreen";
+import StaticMenu from "../components/menu/StaticMenu";
+import AnimatedMenu from "../components/menu/AnimatedMenu";
 
 export default function MapScreen(): ReactElement {
   const { params } = useRoute<RouteProp<MainNavigationParamsList, 'Map'>>();
-  const [data, setData] = useState(MockSpaces);
+  const [data, setData] = useState<Space[]>();
   const [selectedSpaceId, setSelectedSpaceId] = useState<number>();
+  const { height, width } = useWindowDimensions();
 
   useEffect(() => {
-    axios.get<Space[]>('https://bether.tenderribs.cc/api/buildings')
+    axios.get<Space[]>('/spaces')
       .then(response => {
         if(response.data != null && response.data.length > 0) {
           setData(response.data);
@@ -24,10 +26,10 @@ export default function MapScreen(): ReactElement {
       .catch(() => {
         console.error("Api Connection Failed")
       })
-  })
+  }, [])
 
   useEffect(() => {
-    setSelectedSpaceId(params.spaceId)
+    setSelectedSpaceId(params?.spaceId);
   }, [params]);
 
   const styles = StyleSheet.create({
@@ -36,13 +38,15 @@ export default function MapScreen(): ReactElement {
       flexDirection: 'row',
     },
     map: {
-      flexBasis: 900,
+      height: height - 64,
+      flexBasis: width > 1200 ? 900 : width,
       flexGrow: 1
     },
     placesWrapper: {
+      height: height - 64,
+      overflow: 'hidden',
       flexBasis: 350,
       flexGrow: 0.1,
-      paddingTop: 20
     },
     place: {
       paddingHorizontal: 20,
@@ -54,29 +58,23 @@ export default function MapScreen(): ReactElement {
     }
   })
 
+  if(data == null) {
+    return <LoadingScreen />
+  }
+
+  const spaceMenu = width < 1200
+    ? <AnimatedMenu selectedSpaceId={selectedSpaceId} data={data} setSelectedSpaceId={setSelectedSpaceId} />
+    : <StaticMenu selectedSpaceId={selectedSpaceId} data={data} setSelectedSpaceId={setSelectedSpaceId} />
+
   return (
-    <View style={styles.wrapper}>
-      <InteractiveMap lon={8.548276} lat={47.376623}
-                      data={data}
-                      style={styles.map}
-                      selectedSpaceId={selectedSpaceId}
-                      setSelectedSpaceId={setSelectedSpaceId}
-      />
-      <View style={styles.placesWrapper}>
-        <Divider />
-        {data.map(value =>
-          <View>
-            <TouchableOpacity key={value.id} style={[styles.place, selectedSpaceId === value.id && styles.selectedPlace]}
-                              onPress={() => setSelectedSpaceId(value.id)}>
-              <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                <Title>{value.name}</Title>
-                <Rating readonly showRating={false} showReadOnlyText={false} startingValue={value.rating} imageSize={20} />
-              </View>
-            </TouchableOpacity>
-            <Divider />
-          </View>
-        )}
+      <View style={styles.wrapper}>
+        <InteractiveMap lon={8.548276} lat={47.376623}
+                        data={data}
+                        style={styles.map}
+                        selectedSpaceId={selectedSpaceId}
+                        setSelectedSpaceId={setSelectedSpaceId}
+        />
+        { spaceMenu }
       </View>
-    </View>
-  )
+    )
 }

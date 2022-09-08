@@ -6,7 +6,7 @@ import {Ionicons} from "@expo/vector-icons";
 import {ReactNativePaperProps} from "../props/ReactNativePaperProps";
 import { withTheme } from "react-native-paper";
 import ReviewScreens from "../screens/ReviewScreens";
-import ManageSpacesScreen from "../screens/ManageSpacesScreen";
+import CreateSpaceScreen from "../screens/ManageSpacesScreen";
 import MapScreen from "../screens/MapScreen";
 import {MainNavigationParamsList} from "./AppLinking";
 
@@ -21,9 +21,7 @@ function MainNavigation({ theme }: ReactNativePaperProps) {
       initialRouteName="Map"
       screenOptions={{
         headerTitle: "bETHer Spaces",
-        headerStyle: {
-          backgroundColor: theme.colors.surface,
-        },
+        headerStyle: {backgroundColor: theme.colors.surface},
         drawerActiveBackgroundColor: theme.colors.surface,
         drawerActiveTintColor: theme.colors.text,
         drawerLabelStyle: {fontSize: 20, color: theme.colors.text}
@@ -36,7 +34,7 @@ function MainNavigation({ theme }: ReactNativePaperProps) {
                               unmountOnBlur: true,
                             }} />
       <MainNavigator.Screen name={"Spaces"}
-                            component={ManageSpacesScreen}
+                            component={CreateSpaceScreen}
                             options={{drawerIcon: () => InvitesIcon}} />
       <MainNavigator.Screen name={"Reviews"}
                             component={ReviewScreens}

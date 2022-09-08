@@ -7,6 +7,7 @@ import MainNavigation from "./src/navigation/MainNavigation";
 
 import React from 'react';
 import { Platform } from 'react-native';
+import axios from "axios";
 
 export interface GlobalStyleProps {
   css: string;
@@ -31,6 +32,9 @@ function GlobalStyle({ css }: GlobalStyleProps) {
   return null;
 }
 
+axios.defaults.baseURL = 'https://bether.tenderribs.cc/api';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
 
 export default function App() {
   return (
