@@ -8,6 +8,7 @@ base_url = "http://localhost:6969/api/"
 
 spaces_url = base_url + "spaces"
 polygons_url = base_url + "polygons"
+upload_url = base_url + "upload"
 
 
 def post(payload, url):
@@ -17,6 +18,16 @@ def post(payload, url):
     print(response.text)
 
 
+def upload_image(name: str):
+    img_file_name = name.replace(" ", "_") + '.jpg'
+    files = {'files': (img_file_name, open(
+        'space_images/' + img_file_name, 'rb'), 'image', {'uri': ''})}
+
+    response = requests.post(upload_url, files=files)
+    res = json.loads(response.text)
+    return res[0]['id']
+
+
 with open(json_file, "r") as source:
     data = json.load(source)
 
@@ -24,9 +35,11 @@ with open(json_file, "r") as source:
 
     spaces = data['spaces']
     for space in spaces:
+
         spaces_payload = {"data": {
             "name": space['name'],
             "seats": space['seats'],
+            "img": upload_image(space['name'])
         }}
 
         post(spaces_payload, spaces_url)
