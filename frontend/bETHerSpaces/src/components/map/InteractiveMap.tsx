@@ -3,8 +3,8 @@ import { TileLayer, MapContainer } from 'react-leaflet';
 import { withTheme } from 'react-native-paper';
 import { LatLngBounds } from 'leaflet';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import {Space} from "../../data/MockSpaces";
 import SpaceMarker from "./SpaceMarker";
+import {Space} from "../../data/Space";
 
 export interface CustomMapViewProps {
   lon: number;
@@ -22,16 +22,13 @@ export interface CustomMapViewProps {
 function InteractiveMap({lon, lat, data, selectedSpaceId, style, setSelectedSpaceId}: CustomMapViewProps): ReactElement {
   const styles = StyleSheet.create({
     wrapper: {
-      height: 900,
-      paddingBottom: 20,
-      paddingTop: 20,
+      height: '100%',
     }
   });
 
   // Needs to be of type React.CSSProperties since Leaflet map is a React type and not React Native
   const mapStyle : React.CSSProperties = {
-    height: 800,
-    minHeight: 800, // Needed since otherwise the map doesn't render correctly when hidden
+    height: '100%'
   };
 
   const bounds : LatLngBounds = new LatLngBounds(

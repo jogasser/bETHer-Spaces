@@ -1,15 +1,22 @@
-import {LatLngExpression} from "leaflet";
 
 export interface Space {
   id: number
   name: string
   rating: number | undefined
   seats: number
-  measurements?: EnvironmentalData;
-  polygon: LatLngExpression[]
+  measurements?: Measurements;
+  polygons: { lat: number, lon: number}[]
 }
 
-export interface EnvironmentalData{
+export interface Measurements {
   temperature: number;
-  noise: number;
+  pressure: number;
+  humidity: number;
+  light: number;
+  oxidised: number;
+  reduced: number;
+  nh3: number;
+  pm1: number;
+  pm25: number;
+  pm10: number;
 }
