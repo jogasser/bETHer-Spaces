@@ -156,7 +156,12 @@ def save_data(idx, data):
 
 def display_status(connection_status):
     message = "connection: " + str(connection_status)
-    draw.text((10, 10), message, font=smallfont, fill=(255, 255, 255))
+    if connection_status == "ok":
+        draw.text((10, 10), message, font=smallfont, fill=(0, 255, 0))
+    elif connection_status == "bad":
+        draw.text((10, 10), message, font=smallfont, fill=(255, 0, 0))
+    else:
+        draw.text((10, 10), message, font=smallfont, fill=(255, 255, 255))
     st7735.display(img)
 
 #Displays all the text on the LCD
