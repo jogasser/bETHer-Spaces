@@ -1,9 +1,10 @@
-import {ReactElement} from "react";
-import {ScrollView, StyleSheet, TouchableOpacity, useWindowDimensions, View} from "react-native";
-import {Divider, Text, Title} from "react-native-paper";
-import {Rating} from "react-native-ratings";
-import {Space} from "../../data/Space";
-import {theme} from "../../config/theme";
+import { ReactElement } from "react";
+import { ScrollView, StyleSheet, TouchableOpacity, useWindowDimensions, View, Image } from "react-native";
+import { Divider, Text, Title } from "react-native-paper";
+import { Rating } from "react-native-ratings";
+import { Space } from "../../data/Space";
+import { theme } from "../../config/theme";
+import { imageOverlay } from "leaflet";
 
 interface StaticMenuProps {
   selectedSpaceId?: number;
@@ -11,7 +12,7 @@ interface StaticMenuProps {
   setSelectedSpaceId: (v: number) => void;
 }
 
-export default function StaticMenu({data, selectedSpaceId, setSelectedSpaceId}: StaticMenuProps): ReactElement {
+export default function StaticMenu({ data, selectedSpaceId, setSelectedSpaceId }: StaticMenuProps): ReactElement {
   const { height } = useWindowDimensions();
   const styles = StyleSheet.create({
     placesWrapper: {
@@ -27,8 +28,39 @@ export default function StaticMenu({data, selectedSpaceId, setSelectedSpaceId}: 
     },
     selectedPlace: {
       backgroundColor: theme.colors.primary + '33'
+    },
+    spaceBox: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+    details: {
+      flex: 1,
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+
+      marginLeft: '30'
+    },
+    img: { height: 80, aspectRatio: 16 / 9, marginRight: 20 },
+    name: {
+      fontSize: 16,
+      color: '#333',
+      marginBottom: '8px'
+    },
+    readouts: {
+      flex: 1,
+      marginTop: '20px',
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'flex-start'
+    },
+    readout: {
+      fontSize: 14,
+      marginRight: '20px',
+      color: '#777'
     }
   })
+
+  function roundValue(num: number): number {
+    return Math.round(num * 100) / 100
+  }
 
   return (
     <ScrollView style={styles.placesWrapper}>
@@ -36,17 +68,28 @@ export default function StaticMenu({data, selectedSpaceId, setSelectedSpaceId}: 
       {data.map(value =>
         <View key={value.id}>
           <TouchableOpacity style={[styles.place, selectedSpaceId === value.id && styles.selectedPlace]}
-                            onPress={() => setSelectedSpaceId(value.id)}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-              <Title>{value.name}</Title>
-              {value.rating != null ?
-                <Rating readonly
-                        showRating={false}
-                        showReadOnlyText={false}
-                        style={{}}
-                        startingValue={value.rating}
-                        imageSize={20} /> :
-                <Text>Noch keine Bewertungen</Text> }
+            onPress={() => setSelectedSpaceId(value.id)}>
+            <View style={styles.spaceBox}>
+
+              <Image source={{ uri: value.img?.url ? 'https://bether.tenderribs.cc' + value.img.url : 'https://bether.tenderribs.cc/uploads/HCI_J_8_2ae613ed23.jpg' }}
+                style={styles.img} />
+              <View style={styles.details}>
+
+                <Text style={styles.name}>{value.name}</Text>
+
+                {value.rating != null ?
+                  <Rating readonly
+                    showRating={false}
+                    showReadOnlyText={false}
+                    style={{}}
+                    startingValue={value.rating}
+                    imageSize={20} /> :
+                  <Text>Noch keine Bewertungen</Text>}
+                <View style={styles.readouts}>
+                  <Text style={styles.readout}>{value?.measurements ? roundValue(value.measurements[value.measurements.length - 1].temperature) : 24} °C</Text>
+                  <Text style={styles.readout}>{value?.measurements ? roundValue(value.measurements[value.measurements.length - 1].light) : 24} Lux</Text>
+                </View>
+              </View>
             </View>
           </TouchableOpacity>
           <Divider />
