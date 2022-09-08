@@ -25,7 +25,6 @@ def upload_image(name: str):
 
     response = requests.post(upload_url, files=files)
     res = json.loads(response.text)
-    print(res[0]['id'])
     return res[0]['id']
 
 
