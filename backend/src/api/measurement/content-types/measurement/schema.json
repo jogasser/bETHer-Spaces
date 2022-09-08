@@ -47,6 +47,9 @@
     },
     "pm10": {
       "type": "float"
+    },
+    "noise": {
+      "type": "float"
     }
   }
 }
