@@ -14,7 +14,8 @@ module.exports = createCoreController('api::space.space', ({ strapi }) => ({
         return strapi.db.query('api::space.space').findMany({
             populate: {
                 measurements: true,
-                polygons: true
+                polygons: true,
+                img: true
             }
         });
     },
