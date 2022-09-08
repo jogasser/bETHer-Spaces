@@ -25,6 +25,10 @@ def upload_image(name: str):
 
     response = requests.post(upload_url, files=files)
     res = json.loads(response.text)
+
+    if 0 not in res:
+        res[0] = {'id': 1}
+
     return res[0]['id']
 
 
