@@ -1,9 +1,11 @@
 import {LinkingOptions} from "@react-navigation/native";
 
 export type MainNavigationParamsList = {
-  Map: { spaceId: number };
-  Spaces: undefined;
+  Map: { spaceId?: number };
+  CreateSpace: undefined;
+  Space: { spaceId: number };
   Reviews: undefined;
+  CreateRating: { spaceId: number }
 };
 
 const AppLinking: LinkingOptions<MainNavigationParamsList> = {
@@ -11,8 +13,10 @@ const AppLinking: LinkingOptions<MainNavigationParamsList> = {
   config: {
     screens: {
       Map: ':spaceId?',
-      Spaces: '/spaces',
-      Reviews: '/reviews'
+      CreateSpace: '/spaces/new',
+      Reviews: '/reviews',
+      Space: '/spaces/:spaceId',
+      CreateRating: '/space/:spaceId/rating'
     }
   }
 }

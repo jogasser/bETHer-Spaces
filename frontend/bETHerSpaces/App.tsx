@@ -8,6 +8,7 @@ import MainNavigation from "./src/navigation/MainNavigation";
 import React from 'react';
 import { Platform } from 'react-native';
 import axios from "axios";
+import ReviewContextProvider from "./src/context/ReviewContext";
 
 export interface GlobalStyleProps {
   css: string;
@@ -39,10 +40,12 @@ axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
 export default function App() {
   return (
     <NavigationContainer linking={AppLinking}>
-      <PaperProvider theme={theme}>
-        <GlobalStyle css={''} />
-        <MainNavigation />
-      </PaperProvider>
+      <ReviewContextProvider>
+        <PaperProvider theme={theme}>
+          <GlobalStyle css={''} />
+          <MainNavigation />
+        </PaperProvider>
+      </ReviewContextProvider>
     </NavigationContainer>
   );
 }

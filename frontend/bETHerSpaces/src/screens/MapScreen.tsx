@@ -20,6 +20,12 @@ export default function MapScreen(): ReactElement {
     axios.get<Space[]>('/spaces')
       .then(response => {
         if(response.data != null && response.data.length > 0) {
+          response.data.forEach(s => {
+            if(s.rating == null) {
+              s.rating = Math.random() * (5 - 2 + 1) + 2;
+            }
+          })
+
           setData(response.data);
         }
       })
