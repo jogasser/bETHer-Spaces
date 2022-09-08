@@ -49,7 +49,10 @@
       "type": "float"
     },
     "noise": {
-      "type": "float"
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "datetime"
     }
   }
 }
