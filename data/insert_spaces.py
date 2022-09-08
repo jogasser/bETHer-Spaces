@@ -24,12 +24,10 @@ def upload_image(name: str):
         'space_images/' + img_file_name, 'rb'), 'image', {'uri': ''})}
 
     response = requests.post(upload_url, files=files)
-    res = json.loads(response.text)
 
-    if 0 not in res:
-        res[0] = {'id': 1}
-
-    return res[0]['id']
+    if response.status_code == 200:
+        res = json.loads(response.text)
+        return res[0]['id']
 
 
 with open(json_file, "r") as source:
