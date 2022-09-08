@@ -87,7 +87,7 @@ function StackNavigator({
         {routes.map((route) => (
           <TouchableOpacity key={route} onPress={() => navigation.navigate(route)}>
 
-            <Text style={{ color: '#000', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
+            <Text style={{ color: '#666', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
           </TouchableOpacity>
         ))}</View>
     </View>
