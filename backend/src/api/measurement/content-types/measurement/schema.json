@@ -12,14 +12,41 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "temp": {
-      "type": "float"
-    },
     "space": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::space.space",
       "inversedBy": "measurements"
+    },
+    "temperature": {
+      "type": "float"
+    },
+    "humidity": {
+      "type": "float"
+    },
+    "pressure": {
+      "type": "float"
+    },
+    "light": {
+      "type": "float"
+    },
+    "oxidised": {
+      "type": "float"
+    },
+    "reduced": {
+      "type": "float"
+    },
+    "nh3": {
+      "type": "float"
+    },
+    "pm1": {
+      "type": "float"
+    },
+    "pm25": {
+      "type": "float"
+    },
+    "pm10": {
+      "type": "float"
     }
   }
 }
