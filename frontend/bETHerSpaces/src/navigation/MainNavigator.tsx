@@ -1,6 +1,6 @@
-import React, {} from 'react';
+import React, { } from 'react';
 import {
-  StyleSheet, TouchableOpacity, useWindowDimensions, View,
+  StyleSheet, TouchableOpacity, useWindowDimensions, View, Image
 } from 'react-native';
 import {
   ParamListBase, StackActionHelpers, StackNavigationState, StackRouter, StackRouterOptions,
@@ -11,16 +11,16 @@ import {
   NativeStackNavigationOptions,
   NativeStackView,
 } from '@react-navigation/native-stack';
-import {MainNavigationParamsList} from "./AppLinking";
-import {ReactNativePaperProps} from "../props/ReactNativePaperProps";
-import {Text} from "react-native-paper";
+import { MainNavigationParamsList } from "./AppLinking";
+import { ReactNativePaperProps } from "../props/ReactNativePaperProps";
+import { Text } from "react-native-paper";
 
 // The props accepted by the component is a combination of 3 things
 type Props = DefaultNavigatorOptions<
-    ParamListBase,
-    StackNavigationState<ParamListBase>,
-    NativeStackNavigationOptions,
-    NativeStackNavigationEventMap>
+  ParamListBase,
+  StackNavigationState<ParamListBase>,
+  NativeStackNavigationOptions,
+  NativeStackNavigationEventMap>
   & StackRouterOptions & ReactNativePaperProps;
 
 const title: Record<string, string> = {
@@ -30,8 +30,8 @@ const title: Record<string, string> = {
 }
 
 function StackNavigator({
-                          id, initialRouteName, children, screenOptions, theme, defaultScreenOptions, screenListeners,
-                        }: Props) {
+  id, initialRouteName, children, screenOptions, theme, defaultScreenOptions, screenListeners,
+}: Props) {
   const { height } = useWindowDimensions();
   // Used for typing of routes & giving a fixed order to routes
   const routes: (keyof MainNavigationParamsList)[] = ['Map', 'CreateSpace', 'Reviews'];
@@ -46,13 +46,20 @@ function StackNavigator({
       backgroundColor: theme.colors.primary,
       height: menuHeight,
       overflow: 'visible',
+      boxShadow: '0px 0px 10px -4px rgba(0, 0, 0, 0.75)'
     },
+    logo: { height: 50, width: 215, marginLeft: 25 },
     menu_large: {
       flex: 1,
       flexDirection: 'row',
-      justifyContent: 'space-around',
+    },
+    navbarlinks: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
       overflow: 'visible',
-      paddingHorizontal: 20
+      paddingHorizontal: 40
     },
     content_container: {
       zIndex: -1,
@@ -69,37 +76,40 @@ function StackNavigator({
     StackActionHelpers<ParamListBase>,
     NativeStackNavigationOptions,
     NativeStackNavigationEventMap
-    >(StackRouter, {
+  >(StackRouter, {
     id, children, screenOptions, initialRouteName, defaultScreenOptions, screenListeners,
   });
 
   const menu = (
-      <View style={styles.menu_large}>
+    <View style={styles.menu_large}>
+      <Image style={styles.logo} source={require('../../assets/logo.png')} />
+      <View style={styles.navbarlinks}>
         {routes.map((route) => (
           <TouchableOpacity key={route} onPress={() => navigation.navigate(route)}>
-            <Text style={{color: '#FFFFFF', fontSize: 18, fontWeight: 'bold'}}>{title[route]}</Text>
+
+            <Text style={{ color: '#000', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
           </TouchableOpacity>
-        ))}
-      </View>
-    );
+        ))}</View>
+    </View>
+  );
   return (
     <NavigationContent>
       <View style={styles.container}>
-        { menu }
-        </View>
-        <View style={styles.content_container}>
-          <NativeStackView state={state} navigation={navigation} descriptors={descriptors} />
-        </View>
+        {menu}
+      </View>
+      <View style={styles.content_container}>
+        <NativeStackView state={state} navigation={navigation} descriptors={descriptors} />
+      </View>
     </NavigationContent>
   );
 }
 
-const createStackNavigator = createNavigatorFactory <
+const createStackNavigator = createNavigatorFactory<
   StackNavigationState<ParamListBase>,
   NativeStackNavigationOptions,
   NativeStackNavigationEventMap,
   typeof StackNavigator
-  >(StackNavigator);
+>(StackNavigator);
 
 const MainNavigator = createStackNavigator<MainNavigationParamsList>();
 
