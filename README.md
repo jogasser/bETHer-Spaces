@@ -1,4 +1,4 @@
-# bETHer spaces
+<img src= "https://github.com/jogasser/bETHer-Spaces/blob/master/docs/Logo.png" width=40% height=40%>
 
 > Empowering students with healthy spaces.
 
