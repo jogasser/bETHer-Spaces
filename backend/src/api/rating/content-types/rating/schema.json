@@ -4,21 +4,31 @@
   "info": {
     "singularName": "rating",
     "pluralName": "ratings",
-    "displayName": "rating"
+    "displayName": "rating",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "star_value": {
-      "type": "decimal"
-    },
     "space": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::space.space",
       "inversedBy": "ratings"
+    },
+    "cleanness": {
+      "type": "decimal"
+    },
+    "accessibility": {
+      "type": "decimal"
+    },
+    "cosiness": {
+      "type": "decimal"
+    },
+    "comment": {
+      "type": "string"
     }
   }
 }
