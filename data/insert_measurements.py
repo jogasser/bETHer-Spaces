@@ -34,7 +34,7 @@ with urllib.request.urlopen(spaces_url) as url:
             tz = pytz.timezone('Europe/Zurich')
 
             for i in range(10):
-                now -= 1
+                now -= 60
                 ts = datetime.fromtimestamp(now, tz).isoformat()
                 payload = {"data": {
                     "temperature": new_val(25.84, 0.2),
