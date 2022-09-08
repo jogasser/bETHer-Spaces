@@ -47,7 +47,8 @@ with urllib.request.urlopen(spaces_url) as url:
                     "pm0": new_val(2.61, 0.1),
                     "pm24": new_val(9.72, 0.1),
                     "pm9": new_val(16.47, 0.1),
-                    "timestamp": ts
+                    "timestamp": ts,
+                    "space": space['id']
                 }}
 
                 post(payload, measurements_url)
