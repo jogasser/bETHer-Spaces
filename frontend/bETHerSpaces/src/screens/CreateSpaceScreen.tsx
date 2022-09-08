@@ -1,5 +1,5 @@
 import React, {ReactElement, useState} from "react";
-import {StyleSheet, TouchableOpacity, View} from "react-native";
+import {View} from "react-native";
 import {Button, Subheading, Text, TextInput, Title, withTheme} from "react-native-paper";
 import {LatLngBounds, LatLngTuple, LeafletMouseEvent} from "leaflet";
 import {MapContainer, Polygon, TileLayer, useMapEvent} from "react-leaflet";
@@ -48,9 +48,21 @@ function CreateSpaceScreen({ theme }: ReactNativePaperProps): ReactElement {
       (value) => {
         return {lat: value[0], lon: value[1]}
       })
-    axios.post('/spaces', {name: name, seats: seats, polygons: polygons})
-      .then(response => {console.log(response.data)});
+    axios.post('/spaces', {data: {name: name, seats: seats}})
+      .then(async response => {
+        const spaceId = response.data.data.id
+        console.log("Saved space " + name);
+        for(let i = 0; i < polygons.length; i++) {
+          await axios.post('/polygons', {data: {...polygons[i], space: spaceId}})
+            .then(() => console.log("Saved polygon point " + polygons[i].lat.toString() + '/' + polygons[i].lon.toString()))
+        }
+      });
   }
+
+  const isPostReady = name.match(/^\s*$/) == null
+    && seats.match(/^\s*$/) == null
+    && seats.match(/\D/) == null
+    && polygon.length > 2;
 
   return (
     <View style={{padding: 20, paddingBottom: 0, height: '100%'}}>
@@ -70,6 +82,10 @@ function CreateSpaceScreen({ theme }: ReactNativePaperProps): ReactElement {
             <Ionicons name={'arrow-undo-outline'} color={theme.colors.text} size={25} />
             <Text>Undo</Text>
           </Button>
+          <Button mode={'contained'} onPress={createSpace} style={{marginBottom: 20, marginRight: 20}} disabled={!isPostReady}>
+            <Ionicons name={'save-outline'} color={'#FFFFFF'} size={25} />
+            Save
+          </Button>
         </View>
 
         <MapContainer
@@ -88,7 +104,6 @@ function CreateSpaceScreen({ theme }: ReactNativePaperProps): ReactElement {
             positions={polygon}
             color={theme.colors.primary}
             fill>
-
           </Polygon>
         </MapContainer>
     </View>
