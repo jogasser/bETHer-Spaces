@@ -2,9 +2,9 @@
 export interface Space {
   id: number
   name: string
-  rating: number | undefined
+  rating?: number
   seats: number
-  measurements?: Measurements;
+  measurements?: Measurements[];
   polygons: { lat: number, lon: number}[]
 }
 
@@ -19,4 +19,5 @@ export interface Measurements {
   pm1: number;
   pm25: number;
   pm10: number;
+  createdAt: Date;
 }

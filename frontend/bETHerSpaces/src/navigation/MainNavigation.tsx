@@ -1,44 +1,29 @@
 import React  from "react"
-import {
-  createDrawerNavigator,
-} from '@react-navigation/drawer';
-import {Ionicons} from "@expo/vector-icons";
 import {ReactNativePaperProps} from "../props/ReactNativePaperProps";
 import { withTheme } from "react-native-paper";
 import ReviewScreens from "../screens/ReviewScreens";
-import CreateSpaceScreen from "../screens/ManageSpacesScreen";
 import MapScreen from "../screens/MapScreen";
+import CreateSpaceScreen from "../screens/CreateSpaceScreen";
+import MainNavigator from "./MainNavigator";
+import SpaceScreen from "../screens/SpaceScreen";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {MainNavigationParamsList} from "./AppLinking";
+import CreateRatingScreen from "../screens/CreateReviewScreen";
 
-const MainNavigator = createDrawerNavigator<MainNavigationParamsList>();
+export type MainNavigationNavProps = NativeStackNavigationProp<MainNavigationParamsList, 'Map'>;
+
+export type MainNavigationProps = {
+  navigation: MainNavigationNavProps
+};
 
 function MainNavigation({ theme }: ReactNativePaperProps) {
-  const RequestIcon  = <Ionicons name={"search-outline"} size={25} color={theme.colors.text}/>
-  const InvitesIcon  = <Ionicons name={"business-outline"} size={25} color={theme.colors.text}/>
-  const EventsIcon   = <Ionicons name={"person-outline"} size={25} color={theme.colors.text}/>
   return (
-    <MainNavigator.Navigator
-      initialRouteName="Map"
-      screenOptions={{
-        headerTitle: "bETHer Spaces",
-        headerStyle: {backgroundColor: theme.colors.surface},
-        drawerActiveBackgroundColor: theme.colors.surface,
-        drawerActiveTintColor: theme.colors.text,
-        drawerLabelStyle: {fontSize: 20, color: theme.colors.text}
-      }}
-    >
-      <MainNavigator.Screen name={"Map"}
-                            component={MapScreen}
-                            options={{
-                              drawerIcon: () => RequestIcon,
-                              unmountOnBlur: true,
-                            }} />
-      <MainNavigator.Screen name={"Spaces"}
-                            component={CreateSpaceScreen}
-                            options={{drawerIcon: () => InvitesIcon}} />
-      <MainNavigator.Screen name={"Reviews"}
-                            component={ReviewScreens}
-                            options={{drawerIcon: () => EventsIcon}} />
+    <MainNavigator.Navigator initialRouteName="Map" screenOptions={{headerShown: false}} theme={theme}>
+      <MainNavigator.Screen name={'Map'} component={MapScreen} />
+      <MainNavigator.Screen name={'CreateSpace'} component={CreateSpaceScreen} />
+      <MainNavigator.Screen name={'Reviews'} component={ReviewScreens} />
+      <MainNavigator.Screen name={'Space'} component={SpaceScreen} />
+      <MainNavigator.Screen name={'CreateRating'} component={CreateRatingScreen} />
     </MainNavigator.Navigator>
   );
 }

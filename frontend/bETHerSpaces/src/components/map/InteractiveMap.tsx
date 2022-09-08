@@ -31,7 +31,7 @@ function InteractiveMap({lon, lat, data, selectedSpaceId, style, setSelectedSpac
     height: '100%'
   };
 
-  const bounds : LatLngBounds = new LatLngBounds(
+  const bounds = new LatLngBounds(
     [lat - 0.001, lon - 0.001],
     [lat + 0.001, lon + 0.001],
   );
