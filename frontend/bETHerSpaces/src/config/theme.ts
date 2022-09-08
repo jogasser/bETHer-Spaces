@@ -1,5 +1,5 @@
-import {Fonts} from "react-native-paper/lib/typescript/types";
-import {configureFonts} from "react-native-paper";
+import { Fonts } from "react-native-paper/lib/typescript/types";
+import { configureFonts } from "react-native-paper";
 
 const generalFontConfig: Fonts = {
   light: {
@@ -11,7 +11,7 @@ const generalFontConfig: Fonts = {
     fontWeight: 'bold',
   },
   regular: {
-    fontFamily: '"Libre Franklin", sans-serif',
+    fontFamily: '"Roboto", sans-serif',
     fontWeight: 'normal',
   },
   thin: {
@@ -28,7 +28,7 @@ const fontConfig = {
 
 export const theme: ReactNativePaper.Theme = {
   colors: {
-    primary: '#1565c0',
+    primary: '#fff',
     accent: '#ffca28',
     text: '#000000',
     background: '#FFFFFF',

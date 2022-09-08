@@ -1,4 +1,4 @@
-import {ReactElement, useCallback, useEffect, useMemo, useState} from "react";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import {
   LayoutChangeEvent,
   ScrollView,
@@ -8,10 +8,10 @@ import {
   View,
   ViewStyle
 } from "react-native";
-import {Divider, Text, Title} from "react-native-paper";
-import {Rating} from "react-native-ratings";
-import {Space} from "../../data/Space";
-import {theme} from "../../config/theme";
+import { Divider, Text, Title } from "react-native-paper";
+import { Rating } from "react-native-ratings";
+import { Space } from "../../data/Space";
+import { theme } from "../../config/theme";
 import Animated, {
   AnimatedStyleProp,
   runOnUI,
@@ -20,7 +20,7 @@ import Animated, {
   useSharedValue,
   withTiming
 } from "react-native-reanimated";
-import {Ionicons} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 function useLayout(defaultWidth?: number) {
   const [layout, setLayout] = useState<{
@@ -55,7 +55,7 @@ interface StaticMenuProps {
   setSelectedSpaceId: (v: number) => void;
 }
 
-export default function AnimatedMenu({data, selectedSpaceId, setSelectedSpaceId}: StaticMenuProps): ReactElement {
+export default function AnimatedMenu({ data, selectedSpaceId, setSelectedSpaceId }: StaticMenuProps): ReactElement {
   const { height, width } = useWindowDimensions();
   const styles = StyleSheet.create({
     placesWrapper: {
@@ -107,7 +107,7 @@ export default function AnimatedMenu({data, selectedSpaceId, setSelectedSpaceId}
 
   const animatedStyle = useAnimatedStyle<AnimatedStyleProp<ViewStyle>>(() => ({
     width: progress.value == 0 ? 0 : size.value,
-    right: -(size.value * (1-progress.value)),
+    right: -(size.value * (1 - progress.value)),
     overflow: 'hidden',
     position: 'absolute',
     top: 0,
@@ -124,8 +124,8 @@ export default function AnimatedMenu({data, selectedSpaceId, setSelectedSpaceId}
 
   return (
     <View style={styles.menu}>
-      <View style={{alignItems: 'flex-end', zIndex: 1}}>
-        <TouchableOpacity onPress={openMenu} style={{backgroundColor: theme.colors.surface}}>
+      <View style={{ alignItems: 'flex-end', zIndex: 1 }}>
+        <TouchableOpacity onPress={openMenu} style={{ backgroundColor: theme.colors.surface }}>
           <Ionicons name={'menu'} size={50} color={theme.colors.text} />
         </TouchableOpacity>
       </View>
@@ -135,24 +135,25 @@ export default function AnimatedMenu({data, selectedSpaceId, setSelectedSpaceId}
           {data.map(value =>
             <View key={value.id}>
               <TouchableOpacity style={[styles.place, selectedSpaceId === value.id && styles.selectedPlace]}
-                                onPress={() => setSelectedSpaceId(value.id)}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                  <Title>{value.name}</Title>
+                onPress={() => setSelectedSpaceId(value.id)}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Text style={{ fontSize: 16 }}>{value.name}</Text>
                   {value.rating != null ?
                     <Rating readonly
-                            showRating={false}
-                            showReadOnlyText={false}
-                            style={{}}
-                            startingValue={value.rating}
-                            imageSize={20} /> :
-                    <Text>Noch keine Bewertungen</Text> }
+                      showRating={false}
+                      showReadOnlyText={false}
+                      style={{}}
+                      startingValue={value.rating}
+                      imageSize={20} /> :
+                    <Text>Noch keine Bewertungen</Text>}
                 </View>
               </TouchableOpacity>
               <Divider />
             </View>
-          )}
-        </ScrollView>
-      </Animated.View>
-    </View>
+          )
+          }
+        </ScrollView >
+      </Animated.View >
+    </View >
   );
 }
