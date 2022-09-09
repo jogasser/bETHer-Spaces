@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet, TouchableOpacity, useWindowDimensions, View, Image
 } from 'react-native';
@@ -13,7 +13,9 @@ import {
 } from '@react-navigation/native-stack';
 import { MainNavigationParamsList } from "./AppLinking";
 import { ReactNativePaperProps } from "../props/ReactNativePaperProps";
-import { Text } from "react-native-paper";
+import {Portal, Text} from "react-native-paper";
+import {Ionicons} from "@expo/vector-icons";
+import { Bearing, FadeView } from 'react-native-fadeview-wrapper';
 
 // The props accepted by the component is a combination of 3 things
 type Props = DefaultNavigatorOptions<
@@ -32,7 +34,7 @@ const title: Record<string, string> = {
 function StackNavigator({
   id, initialRouteName, children, screenOptions, theme, defaultScreenOptions, screenListeners,
 }: Props) {
-  const { height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   // Used for typing of routes & giving a fixed order to routes
   const routes: (keyof MainNavigationParamsList)[] = ['Map', 'CreateSpace', 'Reviews'];
 
@@ -52,6 +54,29 @@ function StackNavigator({
     menu_large: {
       flex: 1,
       flexDirection: 'row',
+    },
+    collapsed_menu_active: {
+      position: 'absolute',
+      height: '100%',
+      width: '100%',
+      backgroundColor: theme.colors.surface,
+    },
+    collapsed_menu_top: {
+      width: '100%',
+      alignItems: 'flex-end',
+      height: menuHeight,
+      justifyContent: 'center',
+    },
+    collapsed_menu_entry_wrapper: {
+      alignItems: 'flex-start',
+      borderColor: theme.colors.primary,
+      borderTopWidth: 1,
+    },
+    menu_button: {
+      flexDirection: 'row',
+      height: menuHeight,
+      alignItems: 'center',
+      paddingRight: 18,
     },
     navbarlinks: {
       flex: 1,
@@ -80,21 +105,53 @@ function StackNavigator({
     id, children, screenOptions, initialRouteName, defaultScreenOptions, screenListeners,
   });
 
-  const menu = (
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const menu = width < 620
+    ? (
+      <View>
+        <TouchableOpacity onPress={() => setMenuVisible(true)} style={styles.menu_button}>
+          <Ionicons name="menu-sharp" size={40} color={theme.colors.text} />
+        </TouchableOpacity>
+        <Portal>
+          <FadeView
+            visible={menuVisible}
+            duration={300}
+            entranceBearing={Bearing.Center}
+            fadeOutScale={1}
+            style={styles.collapsed_menu_active}
+          >
+            <View style={styles.collapsed_menu_top}>
+              <TouchableOpacity onPress={() => setMenuVisible(false)} style={styles.menu_button}>
+                <Ionicons name="menu-sharp" size={40} color={theme.colors.text} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.collapsed_menu_entry_wrapper}>
+              {routes.map((route) => (
+                <TouchableOpacity key={route} onPress={() => navigation.navigate(route)} style={{paddingVertical: 10}}>
+                  <Text style={{ color: '#666', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </FadeView>
+        </Portal>
+      </View>
+)
+    : (
     <View style={styles.menu_large}>
-      <Image style={styles.logo} source={require('../../assets/logo.png')} />
       <View style={styles.navbarlinks}>
         {routes.map((route) => (
           <TouchableOpacity key={route} onPress={() => navigation.navigate(route)}>
-
             <Text style={{ color: '#666', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
           </TouchableOpacity>
-        ))}</View>
+        ))}
+      </View>
     </View>
   );
   return (
     <NavigationContent>
       <View style={styles.container}>
+        <Image style={styles.logo} source={require('../../assets/logo.png')} />
         {menu}
       </View>
       <View style={styles.content_container}>

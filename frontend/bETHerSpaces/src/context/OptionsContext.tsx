@@ -25,9 +25,9 @@ const defaultValues: MeasurementOptions = {
   oxidised: 2,
   reduced: 0.5,
   nh3: 0.5,
-  pm1: 0.5,
-  pm25: 0.5,
-  pm10: 0.5,
+  pm1: 3,
+  pm25: 3,
+  pm10: 3,
 }
 
 export const OptionsContext = createContext({

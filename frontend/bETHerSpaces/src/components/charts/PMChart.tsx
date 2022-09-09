@@ -27,6 +27,8 @@ export default function PMChart({ measurements }: ChartProps): ReactElement {
     yAxisSuffix=" ug/m3"
     fromZero={true}
     chartConfig={{
+      backgroundGradientFrom: "#FFFFFF",
+      backgroundGradientTo: "#FFFFFF",
       color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
       propsForHorizontalLabels: {

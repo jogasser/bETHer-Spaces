@@ -18,8 +18,8 @@ export default function HumidityChart({ measurements }: ChartProps): ReactElemen
     yAxisSuffix=" %"
     fromZero={true}
     chartConfig={{
-      backgroundGradientFrom: "#f2f2f2",
-      backgroundGradientTo: "#f2f2f2",
+      backgroundGradientFrom: "#FFFFFF",
+      backgroundGradientTo: "#FFFFFF",
       color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     }}

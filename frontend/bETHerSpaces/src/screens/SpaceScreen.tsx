@@ -17,6 +17,7 @@ import PMChart from "../components/charts/PMChart";
 import HumidityChart from "../components/charts/HumidityChart";
 import AirQualityChart from "../components/charts/AirQualityChart";
 import RatingList from "../components/RatingList";
+import NoiseChart from "../components/charts/NoiseChart";
 
 export default function SpaceScreen(): ReactElement {
   const { height } = useWindowDimensions();
@@ -146,6 +147,10 @@ export default function SpaceScreen(): ReactElement {
           <View style={styles.column}>
             <Title>Particulate Matter</Title>
             <PMChart measurements={measurements} />
+          </View>
+          <View style={styles.column}>
+            <Title>Noise Level</Title>
+            <NoiseChart measurements={measurements} />
           </View>
         </View>
       </View>

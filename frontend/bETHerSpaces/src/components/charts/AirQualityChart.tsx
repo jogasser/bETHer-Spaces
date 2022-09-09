@@ -27,6 +27,8 @@ export default function AirQualityChart({ measurements }: ChartProps): ReactElem
     yAxisSuffix=" ppm"
     fromZero={true}
     chartConfig={{
+      backgroundGradientFrom: "#FFFFFF",
+      backgroundGradientTo: "#FFFFFF",
       color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
       propsForHorizontalLabels: {

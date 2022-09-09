@@ -6,7 +6,7 @@ import {
 } from 'react-leaflet';
 import { withTheme } from 'react-native-paper';
 import { LatLng, LatLngBoundsExpression} from 'leaflet';
-import { Text, TouchableOpacity, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {Text, TouchableOpacity, StyleProp, StyleSheet, View, ViewStyle, useWindowDimensions} from 'react-native';
 
 export interface CustomMapViewProps {
   lon: number;
@@ -22,6 +22,8 @@ export interface CustomMapViewProps {
  * Map implementation for web
  */
 function CustomMapContainer({ lon, lat, style, children, bounds, mapStyle}: CustomMapViewProps): ReactElement {
+  const { width } = useWindowDimensions();
+
   const styles = StyleSheet.create({
     wrapper: {
       height: '100%',
@@ -39,7 +41,7 @@ function CustomMapContainer({ lon, lat, style, children, bounds, mapStyle}: Cust
     },
     buttonGroup: {
       position: 'absolute',
-      right: 20,
+      right: width > 1200 ? 20 : width / 2 - 100,
       top: 20,
 
       zIndex: 100,

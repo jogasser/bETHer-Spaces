@@ -11,8 +11,8 @@ export const MeasurementThresholds: Record<string, number> = {
   reduced: 1,
   nh3: 1,
   pm1: 2.5,
-  pm25: 2.5,
-  pm10: 2.5,
+  pm25: 10,
+  pm10: 15,
 }
 
 export const MeasurementTitles: Record<string, string> = {
@@ -54,7 +54,13 @@ export function getStatus(measurement: Measurements, option: MeasurementOptions,
     if(Math.abs(measurement[type] - option[type]) > MeasurementThresholds[type] * 2) {
       return 2;
     }
+    if(Math.abs(measurement[type] - option[type]) > MeasurementThresholds[type]) {
+      return 1;
+    }
   } else {
+    if(measurement[type] - option[type] > MeasurementThresholds[type] * 2) {
+      return 2;
+    }
     if(measurement[type] - option[type] > MeasurementThresholds[type]) {
       return 1;
     }
@@ -73,5 +79,6 @@ export interface Measurements {
   pm1: number;
   pm25: number;
   pm10: number;
+  noise: 'high' | 'mid' | 'low';
   timestamp: Date;
 }
