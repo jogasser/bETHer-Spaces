@@ -4,7 +4,7 @@ Fundamentals of the sensor nodes: [https://github.com/sachit27/Soc-IoT](https://
 
 
 
-We modified the python script (see in our repository) for our needs:
+We modified the python script for our needs: [betherSpaces.py](./sensorNodes/betherSpaces.py)
 
 - It sends the measurements to the database through HTTP requests (the link is specified in the variable baseURL).
 
@@ -16,3 +16,4 @@ We modified the python script (see in our repository) for our needs:
 
 
 Make a cronjob to run the script periodically, e.g. every minute.
+
