@@ -63,8 +63,6 @@ function StackNavigator({
     },
     content_container: {
       zIndex: -1,
-      flex: 1,
-      flexBasis: height - menuHeight,
     },
   });
   // also contains navigation

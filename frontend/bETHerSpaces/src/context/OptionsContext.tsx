@@ -1,16 +1,28 @@
 import React, {createContext, ReactElement, useEffect, useState} from 'react';
-import {Measurements} from "../data/Space";
 import LoadingScreen from "../screens/LoadingScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = 'bETHerSpacesOptionsStorage';
 
-const defaultValues: Measurements = {
-  temperature: 20,
+export interface MeasurementOptions {
+  temperature: number,
+  pressure: number,
+  humidity: number,
+  light: number,
+  oxidised: number,
+  reduced: number,
+  nh3: number,
+  pm1: number,
+  pm25: number,
+  pm10: number,
+}
+
+const defaultValues: MeasurementOptions = {
+  temperature: 25,
   pressure: 690,
   humidity: 60,
   light: 10,
-  oxidised: 0.5,
+  oxidised: 2,
   reduced: 0.5,
   nh3: 0.5,
   pm1: 0.5,
@@ -29,7 +41,7 @@ type ErrorContextProviderProps = {
 export default function OptionsContextProvider(
   { children }: ErrorContextProviderProps,
 ): ReactElement {
-  const [envValue, setEnvValue] = useState<Measurements>();
+  const [envValue, setEnvValue] = useState<MeasurementOptions>();
 
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY)

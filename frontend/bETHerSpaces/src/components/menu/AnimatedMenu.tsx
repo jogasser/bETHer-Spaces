@@ -1,6 +1,5 @@
-import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { ReactElement, useCallback, useEffect, useMemo } from "react";
 import {
-  LayoutChangeEvent,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -8,7 +7,7 @@ import {
   View,
   ViewStyle
 } from "react-native";
-import { Divider, Text, Title } from "react-native-paper";
+import { Divider, Text } from "react-native-paper";
 import { Rating } from "react-native-ratings";
 import { Space } from "../../data/Space";
 import { theme } from "../../config/theme";
@@ -21,34 +20,7 @@ import Animated, {
   withTiming
 } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
-
-function useLayout(defaultWidth?: number) {
-  const [layout, setLayout] = useState<{
-    height: number;
-    width: number;
-    measured: boolean;
-  }>({ height: 0, width: defaultWidth || 0, measured: false });
-
-  const onLayout = useCallback(
-    (e: LayoutChangeEvent) => {
-      const { height, width } = e.nativeEvent.layout;
-
-      if (height === layout.height && width === layout.width) {
-        return;
-      }
-
-      setLayout({
-        height,
-        width,
-        measured: true,
-      });
-    },
-    [layout.height, layout.width],
-  );
-
-  return [layout, onLayout] as const;
-}
-
+import useLayout from "../../hooks/useLayout";
 interface StaticMenuProps {
   selectedSpaceId?: number;
   data: Space[];
@@ -78,7 +50,7 @@ export default function AnimatedMenu({ data, selectedSpaceId, setSelectedSpaceId
     }
   })
 
-  const [layout] = useLayout(width < 340 ? width : 340);
+  const [layout] = useLayout(width < 340 ? width : 340, 0);
   const open = useSharedValue(false);
   const handleHeightContent = useMemo(
     () => layout.width,
