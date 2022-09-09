@@ -154,7 +154,9 @@ function StackNavigator({
   return (
     <NavigationContent>
       <View style={styles.container}>
-        <Image style={styles.logo} source={require('../../assets/logo.png')} />
+        <TouchableOpacity onPress={( ) => navigation.navigate('Map')}>
+          <Image style={styles.logo} source={require('../../assets/logo.png')} />
+        </TouchableOpacity>
         {menu}
       </View>
       <View style={styles.content_container}>
