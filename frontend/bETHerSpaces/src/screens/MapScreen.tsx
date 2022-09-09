@@ -22,7 +22,13 @@ export default function MapScreen(): ReactElement {
         if(response.data != null && response.data.length > 0) {
           response.data.forEach(s => {
             if(s.rating == null) {
-              s.rating = Math.random() * (5 - 2 + 1) + 2;
+              if(s.ratings != null && s.ratings.length > 0) {
+                let rating = 0;
+                s.ratings.forEach(r => rating += r.cosiness + r.cleanness + r.accessibility)
+                s.rating = rating / s.ratings.length / 3;
+              } else {
+                s.rating = 0;
+              }
             }
           })
 

@@ -8,6 +8,7 @@ import {LatLngTuple} from "leaflet";
 import {useLinkProps} from "@react-navigation/native";
 import {OptionsContext} from "../../context/OptionsContext";
 import {getOverallStatusColor} from "../../data/Measurement";
+import {Ionicons} from "@expo/vector-icons";
 
 export interface SpaceMarkerProps {
   space: Space
@@ -37,7 +38,7 @@ function SpaceMarker({space, open, callback}: SpaceMarkerProps): ReactElement {
   const linkingProps = useLinkProps({ to: { screen: 'Space', params: { spaceId: space.id } } })
 
   const measurement = space.measurements != null && space.measurements.length > 0
-    ? space.measurements[0]
+    ? space.measurements[space.measurements.length - 1]
     : {temperature: 20, pressure: 690, humidity: 53, light: 350, oxidised: 2.3, reduced: 0.1, nh3: 0.1, pm1: 3.2, pm10: 3.4, pm25: 3.5, timestamp: new Date()}
 
   function roundValue(num: number): number {
@@ -73,8 +74,8 @@ function SpaceMarker({space, open, callback}: SpaceMarkerProps): ReactElement {
           fill
         >
           <Popup autoPanPadding={padding} minWidth={150}>
-            <View style={styles.popup}>
-              <Title {...linkingProps}>{space.name}</Title>
+            <View style={styles.popup} onClick={linkingProps.onPress} href={linkingProps.href} accessibilityRole={linkingProps.accessibilityRole}>
+              <Title><Ionicons name={'open-outline'} size={20} color={'#000000'}/> {space.name}</Title>
               <Rating
                 style={{ marginVertical: 5 }}
                 type='star'

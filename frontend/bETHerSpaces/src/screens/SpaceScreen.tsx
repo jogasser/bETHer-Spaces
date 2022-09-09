@@ -11,7 +11,14 @@ import axios from "axios";
 import {Space} from '../data/Space';
 import TemperatureChart from "../components/charts/TemperatureChart";
 import {OptionsContext} from "../context/OptionsContext";
-import {getStatus, getStatusColor, Measurements, MeasurementTitles, RelevantMeasurements} from "../data/Measurement";
+import {
+  getOverallStatusColor,
+  getStatus,
+  getStatusColor,
+  Measurements,
+  MeasurementTitles, MeasurementUnits,
+  RelevantMeasurements
+} from "../data/Measurement";
 import {sortMeasurement} from "../props/ChartProps";
 import PMChart from "../components/charts/PMChart";
 import HumidityChart from "../components/charts/HumidityChart";
@@ -64,6 +71,11 @@ export default function SpaceScreen(): ReactElement {
   }, [space]);
 
 
+  function roundValue(num: number): string {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  }
+
+
   const linkingProps = useLinkProps({to: {screen: 'CreateRating', params: {spaceId: spaceId}}})
 
   if(space == null) {
@@ -73,10 +85,10 @@ export default function SpaceScreen(): ReactElement {
     const measurementView = lastMeasurement != null ?
       <View>
         {RelevantMeasurements.map(m =>
-          <View style={styles.measurement}>
+          <View style={[styles.measurement, {width: 200, justifyContent: 'space-between'}]}>
             <Text>{MeasurementTitles[m]}: </Text>
             <Text style={[styles.dataPoint, {color: getStatusColor(getStatus(lastMeasurement, preferredEnvironment, m))}]}>
-              {lastMeasurement[m]}
+              {roundValue(lastMeasurement[m])} {MeasurementUnits[m]}
             </Text>
           </View>
         )}
@@ -119,7 +131,8 @@ export default function SpaceScreen(): ReactElement {
                 url={`https://osm.ideal-sharing.ch/tile/{z}/{x}/{y}.png`}
               />
               <Marker position={location}/>
-              <Polygon positions={space.polygons.map(value => [value.lat, value.lon])} />
+              <Polygon positions={space.polygons.map(value => [value.lat, value.lon])}
+                       color={lastMeasurement ? getOverallStatusColor(lastMeasurement, preferredEnvironment) : 'blue'} />
             </MapContainer>
           </View>
           <View style={styles.column}>
