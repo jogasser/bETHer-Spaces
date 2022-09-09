@@ -1,5 +1,8 @@
 # Backend
 
+
+![DB Diagram](./dbdiagram.png)
+
 A REST API receives measurements from the Raspberry Pis and saves them in a database. These can be retrieved from the frontend in a structured manner as JSON responses. The entire backend is hosted on a Debian VPS using Apache2 as backend.
 
 The database is managed with Strapi, for which there is a detailed usage guide below.
