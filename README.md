@@ -1,6 +1,6 @@
 <img src= "https://github.com/jogasser/bETHer-Spaces/blob/master/docs/Logo.png" width=40% height=40%>
 
-> Empowering students with healthy spaces.
+> Providing students with optimal study spaces.
 
 With bETHer spaces we aim to provide an easy to use tool for students to find ideal student learning spaces.
 We use the data provided by Enviro+ sensors to feed an API with environmental information about study spaces.
