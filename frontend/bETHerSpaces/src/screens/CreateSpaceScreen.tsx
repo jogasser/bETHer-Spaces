@@ -7,17 +7,23 @@ import {ReactNativePaperProps} from "../props/ReactNativePaperProps";
 import axios from "axios";
 import {Ionicons} from "@expo/vector-icons";
 import CustomMapContainer from "../components/map/CustomMapContainer";
+import {MainNavigationProps} from "../navigation/MainNavigation";
+import {CommonActions} from "@react-navigation/native";
 
-interface ClickHandlerProps {
+interface ClickHandlerProps{
   callback: (e: LeafletMouseEvent) => void
 }
 
-function ClickHandler({ callback } : ClickHandlerProps): ReactElement {
+function ClickHandler({ callback,  } : ClickHandlerProps): ReactElement {
   useMapEvent('click', callback);
   return <View />;
 }
 
-function CreateSpaceScreen({ theme }: ReactNativePaperProps): ReactElement {
+interface CreateSpaceScreenProps extends MainNavigationProps, ReactNativePaperProps {
+
+}
+
+function CreateSpaceScreen({ theme, navigation }: CreateSpaceScreenProps): ReactElement {
   const [name, setName] = useState('');
   const [seats, setSeats] = useState('');
   const [polygon, setPolygon] = useState<LatLngTuple[]>([]);
@@ -33,15 +39,15 @@ function CreateSpaceScreen({ theme }: ReactNativePaperProps): ReactElement {
   const revert = () => setPolygon(p => p.splice(0, p.length - 1));
 
   const createSpace = () => {
-    if(name.match(/^\s*$/) != null) {
+    if (name.match(/^\s*$/) != null) {
       return
     }
 
-    if(seats.match(/^\s*$/) != null || seats.match(/\D/) != null) {
+    if (seats.match(/^\s*$/) != null || seats.match(/\D/) != null) {
       return
     }
 
-    if(polygon.length < 3) {
+    if (polygon.length < 3) {
       return
     }
 
@@ -53,11 +59,16 @@ function CreateSpaceScreen({ theme }: ReactNativePaperProps): ReactElement {
       .then(async response => {
         const spaceId = response.data.data.id
         console.log("Saved space " + name);
-        for(let i = 0; i < polygons.length; i++) {
+        for (let i = 0; i < polygons.length; i++) {
           await axios.post('/polygons', {data: {...polygons[i], space: spaceId}})
             .then(() => console.log("Saved polygon point " + polygons[i].lat.toString() + '/' + polygons[i].lon.toString()))
         }
-      });
+
+        navigation.dispatch(CommonActions.reset({
+          index: 1,
+          routes: [{name: "Map"}],
+        }));
+      })
   }
 
   const isPostReady = name.match(/^\s*$/) == null

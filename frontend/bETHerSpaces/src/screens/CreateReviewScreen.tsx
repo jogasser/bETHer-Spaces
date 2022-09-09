@@ -8,8 +8,10 @@ import {MainNavigationParamsList} from "../navigation/AppLinking";
 import {RatingContext} from "../context/ReviewContext";
 import {Space} from "../data/Space";
 import LoadingScreen from "./LoadingScreen";
+import {CommonActions} from "@react-navigation/native";
+import {MainNavigationProps} from "../navigation/MainNavigation";
 
-function CreateRatingScreen(): ReactElement {
+function CreateRatingScreen( { navigation }: MainNavigationProps): ReactElement {
   const spaceId  = useRoute<RouteProp<MainNavigationParamsList, 'Space'>>().params.spaceId;
   const [comment, setComment] = useState('');
   const [cosiness, setCoziness] = useState(5);
@@ -30,6 +32,10 @@ function CreateRatingScreen(): ReactElement {
     })
       .then(response => {
         addRating(response.data.data.id);
+        navigation.dispatch(CommonActions.reset({
+          index: 1,
+          routes: [{name: "Space", params: {spaceId: spaceId}}],
+        }));
       });
   }
   const [space, setSpace] = useState<Space>();
@@ -65,4 +71,4 @@ function CreateRatingScreen(): ReactElement {
   }
 }
 
-export default withTheme(CreateRatingScreen)
+export default CreateRatingScreen

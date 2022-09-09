@@ -1,10 +1,9 @@
 import { ReactElement } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, useWindowDimensions, View, Image } from "react-native";
-import { Divider, Text, Title } from "react-native-paper";
+import { Divider, Text } from "react-native-paper";
 import { Rating } from "react-native-ratings";
 import { Space } from "../../data/Space";
-import { theme } from "../../config/theme";
-import { imageOverlay } from "leaflet";
+import { theme } from "../../config/theme"
 
 interface StaticMenuProps {
   selectedSpaceId?: number;
@@ -85,10 +84,15 @@ export default function StaticMenu({ data, selectedSpaceId, setSelectedSpaceId }
                     startingValue={value.rating}
                     imageSize={20} /> :
                   <Text>Noch keine Bewertungen</Text>}
-                <View style={styles.readouts}>
-                  <Text style={styles.readout}>{value?.measurements ? roundValue(value.measurements[value.measurements.length - 1].temperature) : 24} °C</Text>
-                  <Text style={styles.readout}>{value?.measurements ? roundValue(value.measurements[value.measurements.length - 1].light) : 24} Lux</Text>
-                </View>
+                {value.measurements != null && value.measurements[value.measurements.length - 1] != null ?
+                  <View style={styles.readouts}>
+                    <Text style={styles.readout}>{value?.measurements ? roundValue(value.measurements[value.measurements.length - 1].temperature) : 24} °C</Text>
+                    <Text style={styles.readout}>{value?.measurements ? roundValue(value.measurements[value.measurements.length - 1].light) : 24} Lux</Text>
+                  </View> :
+                  <View style={styles.readouts}>
+                    <Text style={styles.readout}>No data available</Text>
+                  </View>
+                }
               </View>
             </View>
           </TouchableOpacity>
