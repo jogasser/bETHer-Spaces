@@ -24,6 +24,9 @@ def get_stars():
 
 
 def get_comment():
+    if (random.randint(1, 15) == 2):
+        return "Smelled like cauliflower :("
+
     num: int = random.randint(1, 3)
     if num == 1:
         return "Gets crowded"
@@ -39,7 +42,7 @@ with urllib.request.urlopen(spaces_url) as url:
     for space in data:
         if len(space['ratings']) == 0:
 
-            for i in range(10):
+            for i in range(random.randint(3, 10)):
                 payload = {"data": {
                     "cleanness": get_stars(),
                     "accessibility": get_stars(),

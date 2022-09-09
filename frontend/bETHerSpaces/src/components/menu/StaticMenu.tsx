@@ -87,7 +87,7 @@ export default function StaticMenu({ data, selectedSpaceId, setSelectedSpaceId }
                 {value.measurements != null && value.measurements[value.measurements.length - 1] != null ?
                   <View style={styles.readouts}>
                     <Text style={styles.readout}>{value?.measurements ? roundValue(value.measurements[value.measurements.length - 1].temperature) : 24} °C</Text>
-                    <Text style={styles.readout}>{value?.measurements ? roundValue(value.measurements[value.measurements.length - 1].light) : 24} Lux</Text>
+                    <Text style={styles.readout}>{value?.measurements ? value.measurements[value.measurements.length - 1].noise : 24} noise</Text>
                   </View> :
                   <View style={styles.readouts}>
                     <Text style={styles.readout}>No data available</Text>
