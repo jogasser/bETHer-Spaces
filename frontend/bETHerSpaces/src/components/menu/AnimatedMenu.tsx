@@ -97,8 +97,8 @@ export default function AnimatedMenu({ data, selectedSpaceId, setSelectedSpaceId
   return (
     <View style={styles.menu}>
       <View style={{ alignItems: 'flex-end', zIndex: 1 }}>
-        <TouchableOpacity onPress={openMenu} style={{ backgroundColor: theme.colors.surface }}>
-          <Ionicons name={'menu'} size={50} color={theme.colors.text} />
+        <TouchableOpacity onPress={openMenu} style={{ backgroundColor: theme.colors.surface, padding: 7.5 }}>
+          <Ionicons name={'business-outline'} size={35} color={theme.colors.text} />
         </TouchableOpacity>
       </View>
       <Animated.View style={animatedStyle}>

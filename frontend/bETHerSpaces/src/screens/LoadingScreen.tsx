@@ -21,7 +21,7 @@ function LoadingScreen({ theme }: ReactNativePaperProps): ReactElement {
   });
   return (
     <View style={styles.wrapper}>
-      <ActivityIndicator size="large" style={styles.spinner} animating />
+      <ActivityIndicator size="large" color='#1565c0' style={styles.spinner} animating />
     </View>
   );
 }

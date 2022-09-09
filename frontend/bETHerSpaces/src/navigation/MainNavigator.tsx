@@ -128,7 +128,10 @@ function StackNavigator({
             </View>
             <View style={styles.collapsed_menu_entry_wrapper}>
               {routes.map((route) => (
-                <TouchableOpacity key={route} onPress={() => navigation.navigate(route)} style={{paddingVertical: 10}}>
+                <TouchableOpacity key={route} onPress={() => {
+                  setMenuVisible(false);
+                  navigation.navigate(route)
+                }} style={{paddingVertical: 10}}>
                   <Text style={{ color: '#666', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
                 </TouchableOpacity>
               ))}
