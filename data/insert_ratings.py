@@ -24,6 +24,9 @@ def get_stars():
 
 
 def get_comment():
+    if (random.randint(1, 15) == 2):
+        return "Smelled like cauliflower :("
+
     num: int = random.randint(1, 3)
     if num == 1:
         return "Gets crowded"
