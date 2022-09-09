@@ -2,8 +2,25 @@
 
 The frontend is developed in React Native. We chose this framework to reach as many platforms as possible, as it allows to publish the app as a web page as well as a mobile app.
 Even tho we did not currently implemented it as a mobile app, this could easily be done by replacing all components that have no native integration (e.g the map).
+ 
+## Getting Started
+A Dockerfile is provided to pack the frontend into a Docker container. To build the container run in `frontend/bETHerSpaces`:
 
-## Prerequisites 
+```
+docker build -t bETHer:latest .
+```
+
+To start the container and expose the app on port 8080, run: 
+
+```
+docker run -p 8080:80 bETHer:latest
+```
+
+The app should be accessible on `http://localhost:8080/`.
+
+## Development
+
+###  Prerequisites 
 
 Required Node version: v16.20.0
 
@@ -13,7 +30,7 @@ Before the first run, run the following command in frontend/bETHerSpaces/
 npm install
 ```
 
-## Starting the project
+### Starting the project
 
 Run: 
 
