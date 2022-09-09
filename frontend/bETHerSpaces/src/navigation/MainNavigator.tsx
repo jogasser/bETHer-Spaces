@@ -148,6 +148,10 @@ function StackNavigator({
               <Text style={{ color: '#666', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
             </TouchableOpacity>
           ))}
+          <Text href={'https://github.com/jogasser/bETHer-Spaces'} style={{ color: '#666', paddingLeft: 30, fontSize: 18 }}>
+            GitHub
+            <Ionicons style={{ marginLeft: 10 }} name={'logo-github'} size={20} color={'#666'} />
+          </Text>
         </View>
       </View>
     );
