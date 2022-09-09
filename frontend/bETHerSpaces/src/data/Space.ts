@@ -6,5 +6,8 @@ export interface Space {
   rating?: number
   seats: number
   measurements?: Measurements[];
-  polygons: { lat: number, lon: number}[]
+  img: {
+    url: string
+  }
+  polygons: { lat: number, lon: number }[]
 }
