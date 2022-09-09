@@ -62,6 +62,8 @@ function StackNavigator({
       paddingHorizontal: 40
     },
     content_container: {
+      flex: 1,
+      backgroundColor: '#FFFFFF',
       zIndex: -1,
     },
   });

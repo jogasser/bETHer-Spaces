@@ -18,7 +18,7 @@ export type MainNavigationProps = {
 
 function MainNavigation({ theme }: ReactNativePaperProps) {
   return (
-    <MainNavigator.Navigator initialRouteName="Map" screenOptions={{headerShown: false}} theme={theme}>
+    <MainNavigator.Navigator initialRouteName="Map" screenOptions={{headerShown: false, contentStyle: {backgroundColor: '#FFFFFF'}}} theme={theme}>
       <MainNavigator.Screen name={'Map'} component={MapScreen} />
       <MainNavigator.Screen name={'CreateSpace'} component={CreateSpaceScreen} />
       <MainNavigator.Screen name={'Reviews'} component={ReviewScreens} />
