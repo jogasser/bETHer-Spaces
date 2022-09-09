@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet, TouchableOpacity, useWindowDimensions, View, Image
 } from 'react-native';
@@ -13,8 +13,8 @@ import {
 } from '@react-navigation/native-stack';
 import { MainNavigationParamsList } from "./AppLinking";
 import { ReactNativePaperProps } from "../props/ReactNativePaperProps";
-import {Portal, Text} from "react-native-paper";
-import {Ionicons} from "@expo/vector-icons";
+import { Portal, Text } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
 import { Bearing, FadeView } from 'react-native-fadeview-wrapper';
 
 // The props accepted by the component is a combination of 3 things
@@ -131,7 +131,7 @@ function StackNavigator({
                 <TouchableOpacity key={route} onPress={() => {
                   setMenuVisible(false);
                   navigation.navigate(route)
-                }} style={{paddingVertical: 10}}>
+                }} style={{ paddingVertical: 10 }}>
                   <Text style={{ color: '#666', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
                 </TouchableOpacity>
               ))}
@@ -139,22 +139,22 @@ function StackNavigator({
           </FadeView>
         </Portal>
       </View>
-)
+    )
     : (
-    <View style={styles.menu_large}>
-      <View style={styles.navbarlinks}>
-        {routes.map((route) => (
-          <TouchableOpacity key={route} onPress={() => navigation.navigate(route)}>
-            <Text style={{ color: '#666', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
-          </TouchableOpacity>
-        ))}
+      <View style={styles.menu_large}>
+        <View style={styles.navbarlinks}>
+          {routes.map((route) => (
+            <TouchableOpacity key={route} onPress={() => navigation.navigate(route)}>
+              <Text style={{ color: '#666', paddingLeft: 30, fontSize: 18 }}>{title[route]}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
-    </View>
-  );
+    );
   return (
     <NavigationContent>
       <View style={styles.container}>
-        <TouchableOpacity onPress={( ) => navigation.navigate('Map')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Map')}>
           <Image style={styles.logo} source={require('../../assets/logo.png')} />
         </TouchableOpacity>
         {menu}

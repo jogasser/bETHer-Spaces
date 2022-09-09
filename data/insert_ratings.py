@@ -42,7 +42,7 @@ with urllib.request.urlopen(spaces_url) as url:
     for space in data:
         if len(space['ratings']) == 0:
 
-            for i in range(10):
+            for i in range(random.randint(3, 10)):
                 payload = {"data": {
                     "cleanness": get_stars(),
                     "accessibility": get_stars(),
