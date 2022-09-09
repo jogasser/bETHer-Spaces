@@ -8,9 +8,9 @@ A user can use this data to find a study space that matches their exact environm
 Lastly, our application allows users to review existing spaces and add new spaces to share their favourite spots with other users.
 
 ## 🚀 Getting Started
-|                                                App Screenshot                                                 |                                        Overview                                        |
-| :-----------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
-| [![Architecture Overview](./docs/architecture-overview.png)](https://dbdiagram.io/d/63173da40911f91ba5473ff1) | [![DB Diagram](./docs/dbdiagram.png)](https://dbdiagram.io/d/63173da40911f91ba5473ff1) |
+|          [Website](https://spaces.tenderribs.cc)           |                                             Overview                                             |
+| :--------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
+| [![Scrot](./docs/scrot.png)](https://spaces.tenderribs.cc) | [![overview](./docs/architecture-overview.png)](https://dbdiagram.io/d/63173da40911f91ba5473ff1) |
 
 
 - [Frontend Documentation](./docs/frontend.md)
