@@ -154,15 +154,31 @@ def save_data(idx, data):
     else:
         message = "{}: {:.1f} {}".format(variable[:4], data, unit)
 
+def disconnected_since():
+    if os.path.exists("/home/pi/disconnected_since.txt"):
+        with open('/home/pi/disconnected_since.txt') as disconnected_since_file:
+            disconnected_since = disconnected_since_file.readlines()
+            disconnected_since = disconnected_since[0]
+            return(disconnected_since)
+    else:
+        with open('/home/pi/disconnected_since.txt', 'w+') as disconnected_since_file:
+            disconnected_since_file.write(time_now())
+            disconnected_since_file.close()
+        with open('/home/pi/disconnected_since.txt') as disconnected_since_file:
+            disconnected_since = disconnected_since_file.readlines()
+            disconnected_since = disconnected_since[0]
+            return(disconnected_since)
+
 def display_status(connection_status):
     connectionStr = str("connection: \n")
-    message = str(connection_status)
+    message = str(connection_status) + "\n"
     if connection_status == "ok  :)":
         draw.text((10, 10), connectionStr, font=font, fill=(255, 255, 255))
         draw.text((10, 33), message, font=font, fill=(0, 255, 0))
     elif connection_status == "bad  :(":
         draw.text((10, 10), connectionStr, font=font, fill=(255, 255, 255))
         draw.text((10, 33), message, font=font, fill=(255, 0, 0))
+        draw.text((10, 56), "offline since: " + str(disconnected_since()), font=smallfont, fill=(255, 255, 255))
     else:
         draw.text((10, 10), connectionStr, font=font, fill=(255, 255, 255))
         draw.text((10, 33), message, font=font, fill=(255, 255, 255))
@@ -360,6 +376,10 @@ headers = {"Content-Type": "application/json"}
 try:
     get = requests.get(baseURL)
     if get.status_code == 200:
+        #since the database is now reachable we can delete the disconnected_since file if it exists
+        if os.path.exists("/home/pi/disconnected_since.txt"):
+            os.remove("/home/pi/disconnected_since.txt")
+
         if os.path.exists("/home/pi/temp_data.csv"):
             #send temporarily saved measurements to db
             with open('/home/pi/temp_data.csv') as csv_file:
@@ -369,6 +389,7 @@ try:
                     reader = csv.reader(line)
                     oldPayload = dict(reader)
                 response = requests.request("POST", baseURL, json=oldPayload, headers=headers, params=querystring)
+            display_status("ok  :)")
             os.remove("/home/pi/temp_data.csv")
         else:
             #send newest measurements
