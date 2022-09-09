@@ -1,9 +1,11 @@
 import {Measurements} from "./Measurement";
+import {Rating} from "./Rating";
 
 export interface Space {
   id: number;
   name: string;
-  rating?: number;
+  ratings?: Rating[];
+  rating?: number
   seats: number;
   measurements?: Measurements[];
   img: {

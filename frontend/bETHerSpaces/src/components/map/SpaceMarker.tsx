@@ -37,7 +37,7 @@ function SpaceMarker({space, open, callback}: SpaceMarkerProps): ReactElement {
   const linkingProps = useLinkProps({ to: { screen: 'Space', params: { spaceId: space.id } } })
 
   const measurement = space.measurements != null && space.measurements.length > 0
-    ? space.measurements[0]
+    ? space.measurements[space.measurements.length - 1]
     : {temperature: 20, pressure: 690, humidity: 53, light: 350, oxidised: 2.3, reduced: 0.1, nh3: 0.1, pm1: 3.2, pm10: 3.4, pm25: 3.5, timestamp: new Date()}
 
   function roundValue(num: number): number {

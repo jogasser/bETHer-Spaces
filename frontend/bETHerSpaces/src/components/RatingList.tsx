@@ -27,15 +27,15 @@ export default function RatingList({ spaceId }: RatingListProps): ReactElement {
                    style={{width: '100%', justifyContent: 'space-between'}}
 
                    title={
-          <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
+          <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center', marginVertical: 5}}>
             <Rating readonly
                     showReadOnlyText={false}
                     imageSize={30}
                     startingValue={(rating.cosiness + rating.accessibility + rating.cleanness) / 3}/>
-            <Text>{rating.comment}</Text>
+            <Text style={{marginRight: 10}}>{rating.comment}</Text>
           </View>
                      }>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', marginTop: 5, justifyContent: 'space-between', width: 200}}>
             <Text>Cleanness: </Text>
             <Rating readonly
                     showRating={false}
@@ -43,7 +43,7 @@ export default function RatingList({ spaceId }: RatingListProps): ReactElement {
                     imageSize={20}
                     startingValue={rating.cleanness}/>
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', marginTop: 5, justifyContent: 'space-between', width: 200}}>
             <Text>Cosiness: </Text>
             <Rating readonly
                     showRating={false}
@@ -51,7 +51,7 @@ export default function RatingList({ spaceId }: RatingListProps): ReactElement {
                     imageSize={20}
                     startingValue={rating.cosiness}/>
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', marginTop: 5, justifyContent: 'space-between', width: 200}}>
             <Text>Accessibility: </Text>
             <Rating readonly
                     showRating={false}
