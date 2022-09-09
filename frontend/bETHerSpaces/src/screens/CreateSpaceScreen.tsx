@@ -2,10 +2,11 @@ import React, {ReactElement, useState} from "react";
 import {View} from "react-native";
 import {Button, Subheading, Text, TextInput, Title, withTheme} from "react-native-paper";
 import {LatLngBounds, LatLngTuple, LeafletMouseEvent} from "leaflet";
-import {MapContainer, Polygon, TileLayer, useMapEvent} from "react-leaflet";
+import {Polygon, useMapEvent} from "react-leaflet";
 import {ReactNativePaperProps} from "../props/ReactNativePaperProps";
 import axios from "axios";
 import {Ionicons} from "@expo/vector-icons";
+import CustomMapContainer from "../components/map/CustomMapContainer";
 
 interface ClickHandlerProps {
   callback: (e: LeafletMouseEvent) => void
@@ -65,7 +66,7 @@ function CreateSpaceScreen({ theme }: ReactNativePaperProps): ReactElement {
     && polygon.length > 2;
 
   return (
-    <View style={{padding: 20, paddingBottom: 0, height: '100%'}}>
+    <View style={{padding: 20, paddingBottom: 0, flex: 1}}>
       <Title>Create a new Space</Title>
         <Subheading>Name: </Subheading>
         <TextInput style={{height: 30}} mode={'flat'} value={name} onChangeText={setName}/>
@@ -87,25 +88,14 @@ function CreateSpaceScreen({ theme }: ReactNativePaperProps): ReactElement {
             Save
           </Button>
         </View>
-
-        <MapContainer
-          style={{flex: 1}}
-          center={{ lat: lat, lng:  lon}}
-          bounds={mapBounds}
-          scrollWheelZoom
-          dragging
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-            url={`https://osm.ideal-sharing.ch/tile/{z}/{x}/{y}.png`}
-          />
+        <CustomMapContainer mapStyle={{flex: 1}} bounds={mapBounds} lat={lat} lon={lon}>
           <ClickHandler callback={(e) => setPolygon(polygon.concat([[e.latlng.lat, e.latlng.lng]]))} />
           <Polygon
             positions={polygon}
-            color={theme.colors.primary}
+            color={'#1565c0'}
             fill>
           </Polygon>
-        </MapContainer>
+        </CustomMapContainer>
     </View>
   )
 }

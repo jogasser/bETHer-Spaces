@@ -62,9 +62,9 @@ function StackNavigator({
       paddingHorizontal: 40
     },
     content_container: {
-      zIndex: -1,
       flex: 1,
-      flexBasis: height - menuHeight,
+      backgroundColor: '#FFFFFF',
+      zIndex: -1,
     },
   });
   // also contains navigation
