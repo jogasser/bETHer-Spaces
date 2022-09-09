@@ -155,13 +155,17 @@ def save_data(idx, data):
         message = "{}: {:.1f} {}".format(variable[:4], data, unit)
 
 def display_status(connection_status):
-    message = "connection: " + str(connection_status)
-    if connection_status == "ok":
-        draw.text((10, 10), message, font=smallfont, fill=(0, 255, 0))
-    elif connection_status == "bad":
-        draw.text((10, 10), message, font=smallfont, fill=(255, 0, 0))
+    connectionStr = str("connection: \n")
+    message = str(connection_status)
+    if connection_status == "ok  :)":
+        draw.text((10, 10), connectionStr, font=font, fill=(255, 255, 255))
+        draw.text((10, 33), message, font=font, fill=(0, 255, 0))
+    elif connection_status == "bad  :(":
+        draw.text((10, 10), connectionStr, font=font, fill=(255, 255, 255))
+        draw.text((10, 33), message, font=font, fill=(255, 0, 0))
     else:
-        draw.text((10, 10), message, font=smallfont, fill=(255, 255, 255))
+        draw.text((10, 10), connectionStr, font=font, fill=(255, 255, 255))
+        draw.text((10, 33), message, font=font, fill=(255, 255, 255))
     st7735.display(img)
 
 #Displays all the text on the LCD
@@ -369,15 +373,16 @@ try:
         else:
             #send newest measurements
             response = requests.request("POST", baseURL, json=payload, headers=headers, params=querystring)
-            display_status("ok")
+            display_status("ok  :)")
             #print(response.text)
 except requests.exceptions.RequestException as connectionError:
+    #save measurements to temp_data.csv (locally)
     with open('/home/pi/temp_data.csv', 'a+') as temp_data_file:
         writer = csv.writer(temp_data_file)
         for key, value in payload.items():
             writer.writerow([key,value])
         temp_data_file.close()
-        display_status("bad")
+        display_status("bad  :(")
     raise SystemExit(f"{baseURL}: is not reachable \nErr: {connectionError}")
 
 
