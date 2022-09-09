@@ -15,6 +15,7 @@ module.exports = createCoreController('api::space.space', ({ strapi }) => ({
             populate: {
                 measurements: true,
                 polygons: true,
+                ratings: true,
                 img: true
             }
         });
