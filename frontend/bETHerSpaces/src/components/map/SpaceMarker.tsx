@@ -8,6 +8,7 @@ import {LatLngTuple} from "leaflet";
 import {useLinkProps} from "@react-navigation/native";
 import {OptionsContext} from "../../context/OptionsContext";
 import {getOverallStatusColor} from "../../data/Measurement";
+import {Ionicons} from "@expo/vector-icons";
 
 export interface SpaceMarkerProps {
   space: Space
@@ -73,8 +74,8 @@ function SpaceMarker({space, open, callback}: SpaceMarkerProps): ReactElement {
           fill
         >
           <Popup autoPanPadding={padding} minWidth={150}>
-            <View style={styles.popup}>
-              <Title {...linkingProps}>{space.name}</Title>
+            <View style={styles.popup} onClick={linkingProps.onPress} href={linkingProps.href} accessibilityRole={linkingProps.accessibilityRole}>
+              <Title><Ionicons name={'open-outline'} size={20} color={'#000000'}/> {space.name}</Title>
               <Rating
                 style={{ marginVertical: 5 }}
                 type='star'
