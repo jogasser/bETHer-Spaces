@@ -16,7 +16,7 @@ import {
   getStatus,
   getStatusColor,
   Measurements,
-  MeasurementTitles,
+  MeasurementTitles, MeasurementUnits,
   RelevantMeasurements
 } from "../data/Measurement";
 import {sortMeasurement} from "../props/ChartProps";
@@ -88,7 +88,7 @@ export default function SpaceScreen(): ReactElement {
           <View style={[styles.measurement, {width: 200, justifyContent: 'space-between'}]}>
             <Text>{MeasurementTitles[m]}: </Text>
             <Text style={[styles.dataPoint, {color: getStatusColor(getStatus(lastMeasurement, preferredEnvironment, m))}]}>
-              {roundValue(lastMeasurement[m])}
+              {roundValue(lastMeasurement[m])} {MeasurementUnits[m]}
             </Text>
           </View>
         )}

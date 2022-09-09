@@ -26,6 +26,17 @@ export const MeasurementTitles: Record<string, string> = {
   pm10: 'PM10 Level',
 }
 
+export const MeasurementUnits: Record<string, string> = {
+  temperature: '°C',
+  humidity: '%',
+  oxidised: 'ppm',
+  reduced: 'ppm',
+  nh3: 'ppm',
+  pm1: 'ug/m3',
+  pm25: 'ug/m3',
+  pm10: 'ug/m3',
+}
+
 const statusColors: Record<string, string> = {
   'good': 'green',
   'warn': '#FFCC00',
