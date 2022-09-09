@@ -17,6 +17,13 @@ Lastly, our application allows users to review existing spaces and add new space
 - [Backend Documentation](./docs/backend.md)
 - [Sensor Nodes Documentation](./docs/SensorNodes.md)
 
+## Requirements
+
+- Hardware for sensors (Raspberry Pi zero, Enviro+, power supply, case)
+- Software for the sensors (see: [Sensor Nodes Documentation](./docs/SensorNodes.md))
+- Wifi connection for all sensors
+- Node v16.20.0
+
 ## REST-API
 
 Use our data to kickstart your own project using the following endpoints!
